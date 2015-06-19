@@ -22,12 +22,13 @@
   <!-- load bootstrap and fontawesome via CDN -->
   <!-- load bootstrap and fontawesome via CDN -->
   <link rel="stylesheet" href="lib/bootstrap-3.3.5-dist/css/bootstrap.min.css" />
+  <link href="lib/jquery.terminal/css/jquery.terminal.css" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css" />
   <!-- SPELLS -->
   <!-- load angular and angular route via CDN -->
   
 </head>
-<body ng-app="app">
+<body ng-app="cli">
 <div ng-controller="Ctrl">
 <header>
   <nav class="navbar navbar-default navbar-fixed-top">
@@ -49,11 +50,16 @@
   </nav>
 </header>
 <div class="container" style="margin-top:70px;margin-bottom:140px;">
-  {{message}}
+  <terminal></terminal>
 </div>
 </body>
 </html>
 <script src="lib/jquery-2.1.4.min.js"></script>
 <script src="lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 <script src="lib/angular.min.js"></script>
-<script src="script.js"></script>
+<script src="lib/jquery.terminal/js/jquery.mousewheel-min.js"></script>
+<script src="lib/jquery.terminal/js/jquery.terminal-min.js"></script>
+<script type="text/coffeescript" src="script.coffee"></script>
+<script src="service.js"></script>
+<script src="terminal.js"></script>
+<script src="https://rawgit.com/jashkenas/coffeescript/master/extras/coffee-script.js"></script>
