@@ -53,6 +53,9 @@
       $scope.prompt = '$ ';
       setModule = function(idx) {
         idx = parseInt(idx);
+        if (idx + 1 > $scope.modules.length) {
+          idx = 0;
+        }
         $scope.curIdx = idx;
         $scope.terminal.echo("[[;#00f;]" + $scope.modules[idx] + "]");
         $scope.exercises = $scope.subjects[$scope.subject][$scope.modules[idx]];
@@ -96,7 +99,7 @@
           }
           return $scope.terminal.echo("[[;#fff;]" + $scope.currentX.challenge + "]");
         } else {
-          $scope.terminal.echo($scope.curIdx + ": " + $scope.modules[$scope.curIdx] + " Complete.\nGreat Job!");
+          $scope.terminal.echo("[[;#00f;]" + $scope.curIdx + ": " + $scope.modules[$scope.curIdx] + " Complete.\nGreat Job!]");
           setModule($scope.curIdx + 1);
           return $scope.playing = false;
         }
@@ -114,7 +117,10 @@
       showModules = function(cmd, term) {
         if ($scope.modules != null) {
           return $scope.modules.forEach(function(el, idx) {
-            return $scope.terminal.echo(idx + ": " + el);
+            if ($scope.curIdx !== idx) {
+              return $scope.terminal.echo(idx + ": " + el);
+            }
+            return $scope.terminal.echo("[[;#00f;]" + idx + ": " + el + "]");
           });
         } else {
           return $scope.terminal.echo('You must set a subject first!');
@@ -138,16 +144,7 @@
           }
         }
       };
-      $scope.commands = "full                              Full screen\npfull                             Pretty full screen\nstart, st                         Begin exercises\ncm <module>                       Change module (by #)\nmodules                           Show modules\nclear                             Clear screen\n\nGot a better way to do something, or want to change \nsomething about this project?\nSubmit a pull request or report an issue!\nhttp://github.com/zwhitchchcox/terminal\n";
-      return Array.prototype.getIndexBy = function(name, value) {
-        var i, j, len, prop;
-        for (i = j = 0, len = this.length; j < len; i = ++j) {
-          prop = this[i];
-          if (this[i][name] === value) {
-            return i;
-          }
-        }
-      };
+      return $scope.commands = "full                              Full screen\npfull                             Pretty full screen\ncm <module number>                Change module (by #)\nmodules                           Show modules\n\nGot a better way to do something, or want to change \nsomething about this project?\nSubmit a pull request or report an issue!\nhttp://github.com/zwhitchchcox/terminal\n";
     }
   ]);
 

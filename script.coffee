@@ -74,7 +74,7 @@ cli.controller('Ctrl', ['$scope','$http','Exercises',($scope,$http,Exercises) ->
         $scope.currentX = getRandomExercise()
       $scope.terminal.echo "[[;#fff;]#{$scope.currentX.challenge}]"
     else
-      $scope.terminal.echo($scope.curIdx+": "+$scope.modules[$scope.curIdx]+" Complete.\nGreat Job!")
+      $scope.terminal.echo("[[;#00f;]"+$scope.curIdx+": "+$scope.modules[$scope.curIdx]+" Complete.\nGreat Job!]")
       setModule($scope.curIdx+1)
       $scope.playing = false
       
@@ -88,7 +88,7 @@ cli.controller('Ctrl', ['$scope','$http','Exercises',($scope,$http,Exercises) ->
   showModules = (cmd,term)->
     if $scope.modules?
       $scope.modules.forEach((el,idx) ->
-        return $scope.terminal.echo "#{idx}: #{el}" if $scope.curIdx !== idx
+        return $scope.terminal.echo "#{idx}: #{el}" if $scope.curIdx != idx
         $scope.terminal.echo "[[;#00f;]#{idx}: #{el}]"
         
       )

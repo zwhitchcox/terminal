@@ -260,11 +260,11 @@
                 "subject": "Unix"
             }
         ],
-        "I/O": [
+        "IO": [
             {
                 "challenge": "Type a command that will create a file called 'list.txt' and read in your input to that file until you press ^D (Control+D)",
                 "check": "\\s*cat\\s+>\\s+list\\.txt\\s*",
-                "module": "I/O",
+                "module": "IO",
                 "output": "pear\nbanana\napple\n^D\n(assuming you typed pear, banana, apple, list.txt will now contain that list)",
                 "sample": "cat > list.txt",
                 "subject": "Unix"
@@ -272,7 +272,7 @@
             {
                 "challenge": "Type a command that will take further input until you press ^D  and append it to the file 'list'",
                 "check": "\\s*cat\\s*>>\\s*list\\s*",
-                "module": "I/O",
+                "module": "IO",
                 "output": "peach\ngrape\norange\n^D (Control D to stop)",
                 "sample": "cat >> list",
                 "subject": "Unix"
@@ -280,7 +280,7 @@
             {
                 "challenge": "Concatenate the contents of 'list1' and 'list2' and output them to the file 'biglist'",
                 "check": "\\s*cat\\s+list1\\s+list2\\s*>\\s*biglist\\s*",
-                "module": "I/O",
+                "module": "IO",
                 "output": "Files concatenated. (not actually output)",
                 "sample": "cat list1 list2 > biglist",
                 "subject": "Unix"
@@ -288,7 +288,7 @@
             {
                 "challenge": "Type a command that will read in a list of words until you press ^D and then output them alphabetically",
                 "check": "\\s*sort\\s*",
-                "module": "I/O",
+                "module": "IO",
                 "output": "dog\ncat\nbird\nape\n^D (control d to stop)\nape\nbird \ncat \ndog",
                 "sample": "sort",
                 "subject": "Unix"
@@ -296,7 +296,7 @@
             {
                 "challenge": "Sort the contents of 'biglist' and output result to console",
                 "check": "\\s*sort(\\s+<\\s+)?biglist\\s*",
-                "module": "I/O",
+                "module": "IO",
                 "output": "ape\nbird \ncat \ndog",
                 "sample": "sort < biglist",
                 "subject": "Unix"
@@ -304,7 +304,7 @@
             {
                 "challenge": "Sort the contents of 'biglist' and output the contents to 'newlist'",
                 "check": "\\s*sort\\s*<?\\s*biglist\\s*>\\s*newlist\\s*",
-                "module": "I/O",
+                "module": "IO",
                 "output": "File created containing ordered biglist. (not actually output)",
                 "sample": "sort < biglist > newlist",
                 "subject": "Unix"
@@ -312,7 +312,7 @@
             {
                 "challenge": "Output who is currently logged into the system",
                 "check": "\\s*who\\s*",
-                "module": "I/O",
+                "module": "IO",
                 "output": "lex     console  Mar  8 03:09\nzane    console  Mar  8 02:45",
                 "sample": "who",
                 "subject": "Unix"
@@ -320,7 +320,7 @@
             {
                 "challenge": "Output the names of people currently logged into the system to the file 'names'",
                 "check": "\\s*who\\s*>\\s*names\\s*",
-                "module": "I/O",
+                "module": "IO",
                 "output": "File 'names' created containing info about people logged into system. (not actually output)",
                 "sample": "who > names",
                 "subject": "Unix"
@@ -328,7 +328,7 @@
             {
                 "challenge": "Sort the contents of 'names' and output to console",
                 "check": "\\s*sort\\s*<\\s*names\\s*",
-                "module": "I/O",
+                "module": "IO",
                 "output": "lex      console  Mar  8 02:09\npatrick  console  Mar  8 04:33\nzane     console  Mar  8 03:25",
                 "sample": "sort < names",
                 "subject": "Unix"
@@ -336,7 +336,7 @@
             {
                 "challenge": "Output the sorted names of people logged into the system",
                 "check": "\\s*who\\s*|\\s*sort\\s*",
-                "module": "I/O",
+                "module": "IO",
                 "output": "abba       console  Mar  8 02:34\nbeatrice   console  Mar  8 04:39\ncassandra  console  Mar  8 08:36",
                 "sample": "who | sort",
                 "subject": "Unix"
@@ -344,7 +344,7 @@
             {
                 "challenge": "Output the number of users currently logged in",
                 "check": "\\s*who\\s*\\|\\s*wc\\s+-l\\s*",
-                "module": "I/O",
+                "module": "IO",
                 "output": "3",
                 "sample": "who | wc -l",
                 "subject": "Unix"

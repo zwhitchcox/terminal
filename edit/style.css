@@ -1,0 +1,7 @@
+.link:hover {
+  cursor:default;
+  text-decoration: none;
+}
+a {color:#222}
+a:hover {text-decoration:none !important;}
+.btn-glyph:hover {color:#777; text-decoration:none;}
