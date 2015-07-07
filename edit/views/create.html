@@ -1,0 +1,55 @@
+<section ng-controller="EditCtrl" ng-init="getExercises()">
+<a href="/edit" class="back">
+  <i class="glyphicon glyphicon-menu-left"></i>
+</a>
+<form class="form-horizontal" name="challengeForm" ng-submit="create()">
+
+<div class="form-group">
+<label class="col-sm-2 control-label">Subject</label>
+<div class="col-md-3 col-sm-4">
+<select ng-model="exercise.subject" ng-options="key as key for (key,value) in subjects" class="form-control"></select>
+</div>
+</div>
+
+<div class="form-group">
+  <label class="col-sm-2 control-label">Module</label>
+<div class="col-md-3 col-sm-4">
+<select ng-model="exercise.module" ng-options="key as key for (key,value) in subjects[exercise.subject]" class="form-control"></select>
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-sm-2 control-label">Challenge</label>
+<div class="col-sm-9">
+    <textarea class="form-control" ng-model="exercise.challenge" rows="3"></textarea>
+</div>
+</div>
+
+<div class="form-group" ng-class="{'has-error':!val()}">
+  <label class="col-sm-2 control-label">Sample</label>
+<div class="col-md-3 col-sm-4">
+  <input ng-model="exercise.sample" class="form-control">
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-sm-2 control-label">Check</label>
+<div class="col-sm-9">
+    <textarea class="form-control" ng-model="exercise.check" rows="7"
+      style="font-family:monospace;"></textarea>
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-sm-2 control-label">Output</label>
+<div class="col-sm-9">
+    <textarea class="form-control" ng-model="exercise.output" rows="7"
+      style="font-family:monospace;"></textarea>
+</div>
+</div>
+
+<div class="col-sm-offset-2">
+<button type="submit" class="btn btn-info">Save</button>
+</div>
+</form>
+</section>

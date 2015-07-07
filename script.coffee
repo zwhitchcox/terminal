@@ -88,7 +88,7 @@ cli.controller('Ctrl', ['$scope','$http','Exercises',($scope,$http,Exercises) ->
   showModules = (cmd,term)->
     if $scope.modules?
       $scope.modules.forEach((el,idx) ->
-        return $scope.terminal.echo "#{idx}: #{el}" if $scope.curIdx !== idx
+        return $scope.terminal.echo "#{idx}: #{el}" if $scope.curIdx != idx
         $scope.terminal.echo "[[;#00f;]#{idx}: #{el}]"
         
       )
