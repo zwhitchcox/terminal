@@ -10,20 +10,15 @@
       var cmds, getRandomExercise, getSubject, play, play2, setModule, showModules, subjectOptions, termCmd;
       $scope.init = function() {
         $scope.processCmd = getSubject;
-        return $http.get('clis.json').success(function(data) {
-          return $scope.subjects = data.exercises.reduce(function(prev, cur) {
-            if (!prev.hasOwnProperty(cur.subject)) {
-              prev[cur.subject] = {};
-            }
-            if (!prev[cur.subject].hasOwnProperty(cur.module)) {
-              prev[cur.subject][cur.module] = [];
-            }
-            prev[cur.subject][cur.module].push(cur);
-            return prev;
-          }, {});
-        });
+        if (localStorage['clis'] !== void 0) {
+          return $scope.subjects = JSON.parse(localStorage['clis']);
+        } else {
+          return $http.get('/clis.json').success(function(data) {
+            return $scope.subjects = data;
+          });
+        }
       };
-      subjectOptions = "Please enter a number to choose a subject:\n\n 1: Unix    (Mac/Linux)\n 2: MS DOS  (Windows)\n 3: Git\n";
+      subjectOptions = "Please enter a number to choose a subject:\n\n 1: Unix    (Mac/Linux)\n 2: MS DOS  (Windows)\n 3: Git\n \n Use 'help' to show the help\n";
       getSubject = function(cmd) {
         switch (parseInt(cmd)) {
           case 1:
@@ -52,17 +47,26 @@
       $scope.playing = false;
       $scope.prompt = '$ ';
       setModule = function(idx) {
-        idx = parseInt(idx);
-        if (idx + 1 > $scope.modules.length) {
-          idx = 0;
+        try {
+          idx = parseInt(idx);
+          if (idx + 1 > $scope.modules.length) {
+            idx = 0;
+          }
+          $scope.curIdx = idx;
+          if ($scope.modules[idx] !== void 0) {
+            $scope.terminal.echo("[[;#00f;]" + $scope.modules[idx] + "]");
+            $scope.exercises = $scope.subjects[$scope.subject][$scope.modules[idx]].reduce(function(prev, cur) {
+              prev.push($.extend(true, {}, cur));
+              return prev;
+            }, []);
+            $scope.numX = $scope.exercises.length;
+            $scope.processCmd = play;
+            $scope.currentx = getRandomExercise();
+          }
+          return play2();
+        } catch (_error) {
+          return $scope.terminal.echo('Please input the number of the module you choose');
         }
-        $scope.curIdx = idx;
-        $scope.terminal.echo("[[;#00f;]" + $scope.modules[idx] + "]");
-        $scope.exercises = $scope.subjects[$scope.subject][$scope.modules[idx]];
-        $scope.numX = $scope.exercises.length;
-        $scope.processCmd = play;
-        $scope.currentx = getRandomExercise();
-        return play2();
       };
       getRandomExercise = function() {
         return $scope.exercises[Math.floor(Math.random() * $scope.exercises.length)];
@@ -130,7 +134,7 @@
         help: {
           test: /^\s*help\s*$/g,
           action: function(cmd, term) {
-            return term.echo($scope.commands);
+            return $scope.terminal.echo($scope.commands);
           }
         },
         modules: {
