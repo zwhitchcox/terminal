@@ -3,17 +3,13 @@ cli = angular.module('cli',['ngResource'])
 cli.controller('Ctrl', ['$scope','$http','Exercises',($scope,$http,Exercises) ->
   $scope.init = ->
     $scope.processCmd = getSubject
-    $http.get('clis.json')
-      .success((data) ->
-        $scope.subjects = data.exercises.reduce((prev, cur) ->
-          if !prev.hasOwnProperty(cur.subject)
-            prev[cur.subject] = {}  
-          if !prev[cur.subject].hasOwnProperty(cur.module)
-            prev[cur.subject][cur.module] = []
-          prev[cur.subject][cur.module].push(cur)
-          return prev
-        ,{})
-      )
+    if localStorage['clis']!= undefined
+      $scope.subjects = JSON.parse(localStorage['clis'])
+    else 
+      $http.get('/clis.json')
+        .success((data)->
+          $scope.subjects = data
+        )
   subjectOptions =
     """
       Please enter a number to choose a subject:
@@ -21,6 +17,8 @@ cli.controller('Ctrl', ['$scope','$http','Exercises',($scope,$http,Exercises) ->
        1: Unix    (Mac/Linux)
        2: MS DOS  (Windows)
        3: Git
+       
+       Use 'help' to show the help
 
     """
   getSubject = (cmd) ->
@@ -39,16 +37,22 @@ cli.controller('Ctrl', ['$scope','$http','Exercises',($scope,$http,Exercises) ->
   $scope.playing = false
   $scope.prompt = '$ '
   setModule = (idx)->
-    idx = parseInt(idx)
-    idx = 0 if (idx+1>$scope.modules.length)
-    $scope.curIdx = idx
-    $scope.terminal.echo "[[;#00f;]"+$scope.modules[idx]+"]"
-    $scope.exercises = $scope.subjects[$scope.subject][$scope.modules[idx]]
-    $scope.numX = $scope.exercises.length
-    $scope.processCmd=play
-    $scope.currentx = getRandomExercise()
-    play2()
-
+    try
+      idx = parseInt(idx)
+      idx = 0 if (idx+1>$scope.modules.length)
+      $scope.curIdx = idx
+      if $scope.modules[idx] != undefined
+        $scope.terminal.echo "[[;#00f;]"+$scope.modules[idx]+"]"
+        $scope.exercises = $scope.subjects[$scope.subject][$scope.modules[idx]].reduce((prev,cur) ->
+          prev.push($.extend(true,{},cur))
+          return prev
+        ,[])
+        $scope.numX = $scope.exercises.length
+        $scope.processCmd=play
+        $scope.currentx = getRandomExercise()
+      play2()
+    catch
+      $scope.terminal.echo 'Please input the number of the module you choose'
   getRandomExercise = () ->
     return $scope.exercises[Math.floor(Math.random()*$scope.exercises.length)]
 
@@ -98,7 +102,7 @@ cli.controller('Ctrl', ['$scope','$http','Exercises',($scope,$http,Exercises) ->
     help:
       test: /^\s*help\s*$/g
       action:(cmd,term)->
-        term.echo($scope.commands)
+        $scope.terminal.echo($scope.commands)
     modules:
       test: /^\s*modules\s*$/g
       action: showModules

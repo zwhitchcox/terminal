@@ -6,8 +6,10 @@
   <div class="btn btn-default" ng-class="{'active':asubj==='Git'}"  ng-click="asubj='Git'">Git</div>
   <div class="btn btn-default" ng-click="resetExercises()">Reset</div>
   <button class="btn btn-default" data-toggle="modal" data-target="#myModal">Help</button>
-  <a class="edit" target=_self href="/edit/#/create"><button class="btn btn-default"><i class="glyphicon glyphicon-plus"></i></button></a>
-  <span id="single_clippy"></span>
+  <a data-toggle="modal" data-target="#exerciseEdit" ng-click="save('create')">
+    <button class="btn btn-default" ng-click="curX={}"><i class="glyphicon glyphicon-plus"></i></button>
+  </a>
+  &nbsp;<span id="single_clippy"></span>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -60,10 +62,10 @@
 <span ng-repeat="(module,exercises) in subjects[asubj] |  module:cur.module">
   <h2>{{module}}</h2>
     <li class="list-group-item" ng-repeat="exercise in exercises | filter: {challenge:cur.challenge} | filter: {sample:cur.sample} track by $index">
-      <a class="btn btn-glyph pull-left" data-toggle="modal" data-target="#exerciseEdit" ng-click="setCur(exercise)">
+      <a class="btn btn-glyph pull-left" data-toggle="modal" data-target="#exerciseEdit" ng-click="setCur(exercise);save('edit')">
         <i class="glyphicon glyphicon-edit"></i>
       </a>
-      <a class="btn btn-glyph pull-left" ng-click="remove(module,$index);">
+      <a class="btn btn-glyph pull-left" ng-click="remove(exercise)">
         <i class="glyphicon glyphicon-trash"></i>
       </a>
       {{exercise.challenge}}
@@ -94,6 +96,9 @@
           class="form-control">
           </select>
         </div>
+        <div class="col-md-3 col-sm-4">
+          <input ng-model="curX.module" class="form-control">
+        </div>
         </div>
         
         <div class="form-group">
@@ -103,7 +108,7 @@
         </div>
         </div>
         
-        <div class="form-group" ng-class="{'has-error':!val(this)}">
+        <div class="form-group" ng-class="{'has-error':!val(curX)}">
           <label class="col-sm-2 control-label">Sample</label>
         <div class="col-md-3 col-sm-4">
           <input ng-model="curX.sample" class="form-control">
@@ -130,7 +135,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" ng-click="updateLocalStorage()" class="btn btn-primary">Save changes</button>
+        <button type="button" ng-click="update()" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
