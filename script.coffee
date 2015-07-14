@@ -17,8 +17,7 @@ cli.controller('Ctrl', ['$scope','$http','Exercises',($scope,$http,Exercises) ->
        1: Unix    (Mac/Linux)
        2: MS DOS  (Windows)
        3: Git
-       4: Python
-       
+
        Use 'help' to show the help
 
     """

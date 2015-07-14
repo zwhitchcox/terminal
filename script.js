@@ -18,7 +18,7 @@
           });
         }
       };
-      subjectOptions = "Please enter a number to choose a subject:\n\n 1: Unix    (Mac/Linux)\n 2: MS DOS  (Windows)\n 3: Git\n 4: Python\n \n Use 'help' to show the help\n";
+      subjectOptions = "Please enter a number to choose a subject:\n\n 1: Unix    (Mac/Linux)\n 2: MS DOS  (Windows)\n 3: Git\n\n Use 'help' to show the help\n";
       getSubject = function(cmd) {
         switch (parseInt(cmd)) {
           case 1:
