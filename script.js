@@ -18,20 +18,24 @@
           });
         }
       };
-      subjectOptions = "Please enter a number to choose a subject:\n\n 1: Unix    (Mac/Linux)\n 2: MS DOS  (Windows)\n 3: Git\n \n Use 'help' to show the help\n";
+      subjectOptions = "Please enter a number to choose a subject:\n\n 1: Unix    (Mac/Linux)\n 2: MS DOS  (Windows)\n 3: Git\n 4: Python\n \n Use 'help' to show the help\n";
       getSubject = function(cmd) {
         switch (parseInt(cmd)) {
           case 1:
             $scope.subject = 'Unix';
-            $scope.prompt = '$ ';
+            $scope.terminal.set_prompt('$ ');
             break;
           case 2:
             $scope.subject = 'DOS';
-            $scope.prompt = 'C:\\> ';
+            $scope.terminal.set_prompt('C:\\> ');
             break;
           case 3:
             $scope.subject = 'Git';
-            $scope.prompt = '$ ';
+            $scope.terminal.set_prompt('$ ');
+            break;
+          case 4:
+            $scope.subject = 'Python';
+            $scope.terminal.set_prompt('>>> ');
             break;
           default:
             return $scope.terminal.echo(subjectOptions);
@@ -84,7 +88,7 @@
             }
           } else {
             $scope.wrongs++;
-            term.echo("[[;#f00;]" + $scope.currentX.sample + "]");
+            term.echo("[[;#f00;]" + ($.terminal.escape_brackets($scope.currentX.sample)) + "]");
           }
           return play2();
         }
@@ -148,7 +152,7 @@
           }
         }
       };
-      return $scope.commands = "full                              Full screen\npfull                             Pretty full screen\ncm <module number>                Change module (by #)\nmodules                           Show modules\n\nGot a better way to do something, or want to change \nsomething about this project?\nSubmit a pull request or report an issue!\nhttp://github.com/zwhitchchcox/terminal\n";
+      return $scope.commands = "full                              Full screen\npfull                             Pretty full screen\ncm <module number>                Change module (by #)\nmodules                           Show modules\n\ntip: use Shift+Enter to enter multi-line statements\n\nGot a better way to do something, or want to change \nsomething about this project?\nSubmit a pull request or report an issue!\nhttp://github.com/zwhitchchcox/terminal\n";
     }
   ]);
 

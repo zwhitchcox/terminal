@@ -3,30 +3,56 @@
   'use strict';
   angular.module('app').controller('EditCtrl', [
     '$scope', '$http', '$routeParams', 'curx', function($scope, $http, $routeParams, curx) {
+      $scope.asubj = {
+        active: ''
+      };
+      if (/cli/i.test($routeParams.tech)) {
+        $scope.url = 'clis';
+      } else if (/python/i.test($routeParams.tech)) {
+        $scope.url = 'pythons';
+      }
       $scope.getExercises = function() {
-        if (localStorage['clis'] !== void 0) {
-          return $scope.subjects = JSON.parse(localStorage['clis']);
+        if (localStorage[$scope.url] !== void 0) {
+          console.log(JSON.parse(localStorage[$scope.url]));
+          $scope.subjects = JSON.parse(localStorage[$scope.url]);
         } else {
-          return $http.get('/clis.json').success(function(data) {
-            return $scope.subjects = data;
-          });
+          $scope.resetExercises();
         }
+        return $scope.subjectNames = Object.keys($scope.subjects);
       };
       $scope.setCur = function(x) {
         $scope.editX = x;
         return $scope.curX = $.extend(true, {}, x);
       };
       $scope.val = function(it) {
-        return new RegExp('^' + it.check + '$').test(it.sample);
+        var e;
+        try {
+          return new RegExp('^' + it.check + '$').test(it.sample);
+        } catch (_error) {
+          e = _error;
+        }
       };
       $scope.save = function(state) {
-        return $scope.save = state;
+        return $scope.state = state;
       };
       $scope.update = function() {
-        if ($scope.save === 'create') {
+        if (!$scope.subjects.hasOwnProperty($scope.curX.subject)) {
+          $scope.subjects[$scope.curX.subject] = {};
+        }
+        if (!$scope.subjects[$scope.curX.subject].hasOwnProperty($scope.curX.module)) {
+          $scope.subjects[$scope.curX.subject][$scope.curX.module] = [];
+        }
+        if ($scope.state === 'create') {
           $scope.subjects[$scope.curX.subject][$scope.curX.module].push($scope.curX);
           alert('created');
         } else {
+          if ($scope.editX.module !== $scope.curX.module) {
+            $scope.subjects[$scope.editX.subject][$scope.editX.module].splice($scope.subjects[$scope.editX.subject][$scope.editX.module].indexOf($scope.editX), 1);
+            $scope.state = 'create';
+            $scope.update();
+            $scope.state = 'edit';
+            return;
+          }
           $scope.editX.sample = $scope.curX.sample;
           $scope.editX.subject = $scope.curX.subject;
           $scope.editX.module = $scope.curX.module;
@@ -46,18 +72,26 @@
       $scope.updateLocalStorage = function() {
         var saveSubj;
         saveSubj = $.extend(true, {}, $scope.subjects);
+        Object.keys(saveSubj).forEach(function(curSubj) {
+          return Object.keys(saveSubj[curSubj]).forEach(function(curMod) {
+            if (saveSubj[curSubj][curMod].length === 0) {
+              delete saveSubj[curSubj][curMod];
+              return delete $scope.subjects[curSubj][curMod];
+            }
+          });
+        });
         Object.keys(saveSubj).forEach(function(cur) {
           return delete saveSubj[cur]['$$hashKey'];
         });
-        localStorage['clis'] = JSON.stringify(saveSubj);
+        localStorage[$scope.url] = JSON.stringify(saveSubj);
         return $('#single_clippy').clippy({
-          text: localStorage['clis']
+          text: localStorage[$scope.url]
         });
       };
       return $scope.resetExercises = function() {
-        return $http.get('/clis.json').success(function(data) {
+        return $http.get("/" + $scope.url + ".json").success(function(data) {
           $scope.subjects = data;
-          return localStorage['clis'] = JSON.stringify($scope.subjects);
+          return $scope.updateLocalStorage();
         });
       };
     }

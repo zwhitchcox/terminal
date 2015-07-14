@@ -2,20 +2,8 @@ var app = angular.module('app', ['ngRoute','ui.bootstrap']);
 app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
-    when('/', {
-      templateUrl: 'views/list.html',
-      controller: 'EditCtrl'
-    }).
-    when('/:subject/:module/:index', {
-      templateUrl: 'views/edit.html',
-      controller: 'EditCtrl'
-    }).
-    when('/create', {
-      templateUrl: 'views/create.html',
-      controller: 'EditCtrl'
-    }).
-    when('/json', {
-      templateUrl: 'views/json.html',
+    when('/:tech', {
+      templateUrl: 'list.html',
       controller: 'EditCtrl'
     }).
     otherwise({

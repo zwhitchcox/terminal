@@ -17,15 +17,17 @@ cli.controller('Ctrl', ['$scope','$http','Exercises',($scope,$http,Exercises) ->
        1: Unix    (Mac/Linux)
        2: MS DOS  (Windows)
        3: Git
+       4: Python
        
        Use 'help' to show the help
 
     """
   getSubject = (cmd) ->
     switch parseInt cmd
-      when 1 then $scope.subject = 'Unix'; $scope.prompt = '$ '
-      when 2 then $scope.subject = 'DOS';  $scope.prompt = 'C:\\> '
-      when 3 then $scope.subject = 'Git';  $scope.prompt = '$ '
+      when 1 then $scope.subject = 'Unix';    $scope.terminal.set_prompt '$ '
+      when 2 then $scope.subject = 'DOS';     $scope.terminal.set_prompt 'C:\\> '
+      when 3 then $scope.subject = 'Git';     $scope.terminal.set_prompt '$ '
+      when 4 then $scope.subject = 'Python';  $scope.terminal.set_prompt '>>> '
       else return $scope.terminal.echo subjectOptions
     $scope.modules = Object.keys($scope.subjects[$scope.subject])
     $scope.terminal.echo "Please choose a module to continue"
@@ -65,7 +67,7 @@ cli.controller('Ctrl', ['$scope','$http','Exercises',($scope,$http,Exercises) ->
         else $scope.exercises.splice($scope.exercises.indexOf($scope.currentX), 1)
       else
         $scope.wrongs++
-        term.echo("[[;#f00;]#{$scope.currentX.sample}]")
+        term.echo("[[;#f00;]#{$.terminal.escape_brackets($scope.currentX.sample)}]")
       play2()
 
   play2 = () ->
@@ -118,6 +120,8 @@ cli.controller('Ctrl', ['$scope','$http','Exercises',($scope,$http,Exercises) ->
     pfull                             Pretty full screen
     cm <module number>                Change module (by #)
     modules                           Show modules
+    
+    tip: use Shift+Enter to enter multi-line statements
 
     Got a better way to do something, or want to change 
     something about this project?

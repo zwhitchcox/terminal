@@ -1,0 +1,519 @@
+{
+    "Part I": {
+        "Strings": [
+            {
+                "subject": "Part I",
+                "module": "Strings",
+                "challenge": "Get the second to last character in the variable, 'word'",
+                "sample": "word[-2]",
+                "check": "word\\[-2\\] *",
+                "output": "'o'"
+            },
+            {
+                "subject": "Part I",
+                "module": "Strings",
+                "challenge": "Print all characters from the second to the last to the end of the variable, 'word'",
+                "sample": "word[-2:]",
+                "check": "(print +)?word *\\[ *-2 *: *\\] *",
+                "output": "'on'"
+            },
+            {
+                "subject": "Part I",
+                "module": "Strings",
+                "challenge": "Concatenate 'Py' and 'thon'",
+                "sample": "'Py' 'thon'",
+                "check": "(print +)?('|\")Py('|\") *('|\")thon('|\") *",
+                "output": "'Python'"
+            },
+            {
+                "subject": "Part I",
+                "module": "Strings",
+                "challenge": "Output the word, 'doesn't', encapsulating the word with double quotes",
+                "sample": "\"doesn't\"",
+                "check": "(\"doesn't\" *)|(*print *\"doesn't\" *)",
+                "output": "doesn't"
+            },
+            {
+                "subject": "Part I",
+                "module": "Strings",
+                "challenge": "Output the string 'doesn't', encapsulating the string with single quotes",
+                "sample": "'doesn\\'t'",
+                "check": "('doesn\\\\'t' *)|(print *'doesn\\\\'t' *)",
+                "output": "doesn't"
+            },
+            {
+                "challenge": "Use triple-quotes to print \nHello\nWorld\non two lines, as shown. Note you can press Shift+Enter in the terminal to enter a new line.",
+                "sample": "print \"\"\"\nHello\nWorld\n\"\"\"",
+                "check": "print +\"\"\"\nHello\nWorld\n\"\"\"",
+                "output": "Hello\nWorld",
+                "subject": "Part I",
+                "module": "Strings"
+            },
+            {
+                "subject": "Part I",
+                "module": "Strings",
+                "challenge": "Input a comment with the text, \" this is a comment\"",
+                "sample": "# this is a comment",
+                "check": "# this is a comment",
+                "output": "Great job!"
+            },
+            {
+                "subject": "Part I",
+                "module": "Strings",
+                "challenge": "Use the 'print' command to output\nHello\nWorld\nAs shown, on two lines",
+                "sample": "print \"Hello\\nWorld\"",
+                "check": "print +\"Hello\\\\nWorld\" *",
+                "output": "Hello\nWorld"
+            },
+            {
+                "subject": "Part I",
+                "module": "Strings",
+                "challenge": "Print the second through third characters of the variable, 'word'",
+                "sample": "word[1:3]",
+                "check": "word *\\[ *1 *: *3 *\\] *",
+                "output": "'yt'"
+            },
+            {
+                "subject": "Part I",
+                "module": "Strings",
+                "challenge": "Get the second to last character in the variable, 'word'",
+                "sample": "word[-2]",
+                "check": "word\\[-2\\] *",
+                "output": "'o'"
+            }
+        ],
+        "Numbers": [
+            {
+                "subject": "Part I",
+                "module": "Numbers",
+                "challenge": "Calculate 3 + the last value that was output",
+                "sample": "3 + _",
+                "check": "( *3 *\\+ *\\_ *)|( *\\_ *\\+ *3 *)",
+                "output": "5 (assuming the last value output was 2)"
+            },
+            {
+                "subject": "Part I",
+                "module": "Numbers",
+                "challenge": "Try to output the value of the variable, n (which is a undefined)",
+                "output": "Traceback (most recent call last):\n  File \"<stdin>\", line 1, in <module>\nNameError: name 'n' is not defined",
+                "sample": "n",
+                "check": " *n *"
+            },
+            {
+                "subject": "Part I",
+                "module": "Numbers",
+                "challenge": "Declare m to be 3 and n to be 2 and calculate the product of the two, all on the same line",
+                "sample": "m = 3; n = 2; m * n",
+                "check": " *m *= *3 *; *n *= *2; *m *\\* *n *",
+                "output": "6"
+            },
+            {
+                "subject": "Part I",
+                "module": "Numbers",
+                "challenge": "Calculate 2^5",
+                "sample": "2 ** 5",
+                "check": " *2 *\\*\\* *5 *",
+                "output": "32"
+            },
+            {
+                "subject": "Part I",
+                "module": "Numbers",
+                "challenge": "Calculate the remainder of 17 / 3",
+                "sample": "17 % 3",
+                "check": " *17 *% *3 *",
+                "output": "2"
+            },
+            {
+                "subject": "Part I",
+                "module": "Numbers",
+                "challenge": "Calculate 17 divided by 3, and discard the remainder",
+                "sample": "17 // 3",
+                "check": " *17 *\\/\\/ *3 *",
+                "output": "5"
+            },
+            {
+                "subject": "Part I",
+                "module": "Numbers",
+                "challenge": "Calculate 8 / 5 including as a float (decimal number)",
+                "sample": "8 / 5.0",
+                "check": "( *8 *\\/ *5\\.0 *)|( *8\\.0 *\\/ *5 *)|( *8\\.0 *\\/ *5\\.0 *)",
+                "output": "1.6"
+            },
+            {
+                "subject": "Part I",
+                "module": "Numbers",
+                "challenge": "Calculate 50 - 5*6",
+                "sample": "50 + 5*6",
+                "check": " *50 *\\+ *5 *\\* *6 *",
+                "output": "20"
+            },
+            {
+                "subject": "Part I",
+                "module": "Numbers",
+                "challenge": "Caculate 2 + 2",
+                "sample": "2 + 2",
+                "check": " *2 *\\+ *2 *",
+                "output": "4"
+            }
+        ],
+        "Lists": [
+            {
+                "subject": "Part I",
+                "module": "Lists",
+                "challenge": "Set the variable, 'squares', equal to the list of the numbers 1, 4, 9, 16, 25",
+                "sample": "squares = [1, 4, 9, 16, 25]",
+                "check": "squares *= *\\[ *1 *, *4 *, *9 *, *16 *, *25 *\\] *",
+                "output": "[1, 4, 9, 16, 25]"
+            },
+            {
+                "subject": "Part I",
+                "module": "Lists",
+                "challenge": "Output the value of the second item of the list, 'squares'",
+                "sample": "squares[1]",
+                "check": "squares *\\[ *1 *\\] *",
+                "output": "4"
+            },
+            {
+                "subject": "Part I",
+                "module": "Lists",
+                "challenge": "Output the values, 36, 49, and 63, concatenated to the list, 'squares'",
+                "sample": "squares + [36, 49, 64]",
+                "check": "(print +)?squares *\\+ *\\[ *36 *, *49 *, *64 *\\] *",
+                "output": "[1, 4, 9, 16, 25, 36, 49, 64]"
+            },
+            {
+                "subject": "Part I",
+                "module": "Lists",
+                "challenge": "Append the number, 216 (the cube of 6), to the list, 'cubes'",
+                "sample": "cubes.append(216)",
+                "check": "(print +)?cubes *\\. *append *\\( *216 *\\) *",
+                "output": "(216 appended)"
+            },
+            {
+                "subject": "Part I",
+                "module": "Lists",
+                "challenge": "Set the third through fifth values in the list, 'letters' equal to 'c', 'd', and 'e'.",
+                "sample": "letters[2:5] = ['c', 'd', 'e']",
+                "check": "letters *\\[ *2 *: *5 *\\] *= *\\[ *'c' *, *'d' *, *'e' *\\] *",
+                "output": ""
+            },
+            {
+                "subject": "Part I",
+                "module": "Lists",
+                "challenge": "Remove the third through fifth values from the list, 'letters'.",
+                "sample": "letters[2:5] = []",
+                "check": "letters *\\[ *2 *: *5 *\\] *= *\\[ *\\] *"
+            },
+            {
+                "subject": "Part I",
+                "module": "Lists",
+                "challenge": "Output the third value of the fourth list in the list, 'a'",
+                "sample": "a[4][3]",
+                "check": "a *\\[ *4\\] *\\[ *3 *\\] *",
+                "output": "'b'"
+            },
+            {
+                "subject": "Part I",
+                "module": "Lists",
+                "challenge": "Set the list, 'b', to be a list of the lists, 'c', 'd', and 'e'",
+                "sample": "b = [c,d,e]",
+                "check": "b *= *\\[ *c *, *d *, *e *\\] *"
+            }
+        ],
+        "Flow of Control": [
+            {
+                "subject": "Part I",
+                "module": "Flow of Control",
+                "challenge": "Input an if statement the outputs, 'Negative' if x is less than 0, 'Zero', if x is 0, 'Single', if x is 1, and 'More' for anything else. Please put the conditionals in that order.",
+                "sample": "if x < 0:\n    x = 0\n    print 'Negative'\n    elif x == 0:\n        print 'Zero'\n    elif x == 1:\n        print 'Single'\n    else:\n        'More'",
+                "check": "if +x *< *0 *: *\n(\\t|(    ))x *= *0 *\n(\\t|(    ))print +('|\")Negative('|\") *\n(\\t|(    ))elif +x *== *0 *: *\n(\\t|(    ))(\\t|(    ))print +('|\")Zero('|\") *\n(\\t|(    ))elif +x *== *1 *: *\n(\\t|(    ))(\\t|(    ))print +'Single' *\n(\\t|(    ))else *: *\n(\\t|(    ))(\\t|(    ))('|\")More('|\") *",
+                "output": "More"
+            },
+            {
+                "subject": "Part I",
+                "module": "Flow of Control",
+                "challenge": "Print the value and the length of the value for each item in the list, 'words' (['cat', 'window', 'defenestrate'])",
+                "sample": "for w in words:\n    print w, len(w)",
+                "check": "for +w +in +words *: *\n(\\t|(    ))print +w *, *len *\\( *w *\\) *",
+                "output": "cat 3\nwindow 6\ndefenestrate 12"
+            },
+            {
+                "subject": "Part I",
+                "module": "Flow of Control",
+                "challenge": "Loop the variable, 'w', through the variable, 'words', prepending all values with a length greater than 6 to the list.\n('words' is ['cat', window', 'defenestrate'])",
+                "sample": "for w in words[:]:\n    if len(w) > 6:\n        words.insert(0, w)\nwords",
+                "check": "for +w +in +words *\\[ *: *\\] *:\n(\\t|(    ))if +len *\\( *w *\\) *> *6 *: *\n(\\t|(    ))(\\t|(    ))words *\\. *insert *\\( *0 *, *w *\\)\nwords *",
+                "output": "['defenestrate', 'cat', 'window', 'defenestrate']"
+            },
+            {
+                "subject": "Part I",
+                "module": "Flow of Control",
+                "challenge": "Output the numbers 0 through 9 in a  list",
+                "sample": "range(10)",
+                "check": "range *\\( *10 *\\) *",
+                "output": "[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]"
+            },
+            {
+                "subject": "Part I",
+                "module": "Flow of Control",
+                "challenge": "Output a list of the numbers 0 through 10 stepping by 3.",
+                "sample": "range(0, 10, 3)",
+                "check": "range *\\( *0 *, *10 *, *3 *\\) *",
+                "output": "[0, 3, 6, 9]"
+            },
+            {
+                "subject": "Part I",
+                "module": "Flow of Control",
+                "challenge": "Output every the index of every item in the list, 'a', followed by the value (the list is ['Mary', 'had', 'a', 'little', 'lamb']).",
+                "sample": "for i in range(len(a)):\n    print i, a[i]",
+                "check": "for +i +in +range *\\( *len *\\( *a *\\) *\\) *: *\n(\\t|( + + + +))print +i *, *a *\\[ *i *\\] *",
+                "output": "0 Mary\n1 had\n2 a\n3 little\n4 lamb"
+            },
+            {
+                "subject": "Part I",
+                "module": "Flow of Control",
+                "sample": "for n in range(2, 10):\n    for x in range(2, n):\n        if n % x == 0:\n            print n, 'equals', x, '*', n/x\n            break\n        else:\n        print n, 'is a prime number'",
+                "check": "for +n +in +range *\\( *2, *10 *\\) *: *\n(\\t|(    ))for +x +in +range *\\( *2 *, *n *\\) *: *\n(\\t|(    ))(\\t|(    ))if +n *% *x *== *0 *: *\n(\\t|(    ))(\\t|(    ))(\\t|(    ))print +n *, *'equals' *, *x *, *'\\*' *, *n *\\/ *x *\n(\\t|(    ))(\\t|(    ))(\\t|(    ))break *\n(\\t|(    ))(\\t|(    ))else *: *\n(\\t|(    ))(\\t|(    ))print +n *, *'is a prime number' *",
+                "challenge": "Create a for loop that iterates n from 2 through 10, with a nested for loop that iterates x from 2 through n. If quotient of n divided by x is a whole number, break the nested for loop, and output, 'n equals x * n/x' (replacing the variables with their values). If there are no whole number multiples in the range, output 'n is a prime number'.",
+                "output": "2 is a prime number\n3 is a prime number\n4 equals 2 * 2\n5 is a prime number\n6 equals 2 * 3\n7 is a prime number\n8 equals 2 * 4\n9 equals 3 * 3"
+            },
+            {
+                "subject": "Part I",
+                "module": "Flow of Control",
+                "challenge": "Iterate 'num' from 2 through 10. If the quotient of num divided by two has no remainder, output \"Found an even number\", followed by the number, continue looping without executing the rest of the statement.  If there is a remainder, output, \"Found a number\", followed by the number.",
+                "sample": "for num in range(2, 10):\n    if num % 2 == 0:\n        print \"Found an even number\", num\n            continue\n        print \"Found a number\", num",
+                "check": "for +num +in +range *\\( *2 *, *10 *\\) *: *\n(\\t|(    ))if +num *% *2 *== *0 *: *\n(\\t|(    ))(\\t|(    ))print +(\"|')Found an even number(\"|') *, *num *\n(\\t|(    ))(\\t|(    ))(\\t|(    ))continue *\n(\\t|(    ))(\\t|(    ))print +('|\")Found a number(\"|') *, *num *",
+                "output": "Found an even number 2\nFound a number 3\nFound an even number 4\nFound a number 5\nFound an even number 6\nFound a number 7\nFound an even number 8\nFound a number 9"
+            },
+            {
+                "subject": "Part I",
+                "module": "Flow of Control",
+                "challenge": "Wait for a keyboard interrupt",
+                "sample": "while True:\n    pass",
+                "check": "while +True *: *\n    pass *"
+            },
+            {
+                "subject": "Part I",
+                "module": "Flow of Control",
+                "challenge": "Create a minimal class called, 'MyEmptyClass'",
+                "sample": "class MyEmptyClass:\n    pass",
+                "check": "class +MyEmptyClass *: *\n    pass *"
+            }
+        ],
+        "Defining Functions": [
+            {
+                "subject": "Part I",
+                "module": "Defining Functions",
+                "challenge": "Create a function called 'fib' that takes in the argument, 'n'. It then declares variables 'a' and 'b' to be 0 and 1, respectively, on the same line.\n\nNext, it should iterate while a is less than n, printing 'a'. It should also set a equal to b and b equal to a plus b.",
+                "sample": "def fib(n):\n    a, b = 0, 1\n    while a < n:\n        print a\n        a, b = b, a+b",
+                "check": "def +fib *\\( *n *\\) *: *\n    a *, *b *= *0 *, *1 *\n    while +a *< *n *: *\n        print +a *\n        a *, *b *= *b *, *a *\\+ *b *"
+            },
+            {
+                "subject": "Part I",
+                "module": "Defining Functions",
+                "challenge": "Create a function called fib2 that takes a variable, 'n', sets 'result' equal to an empty list, sets 'a' and 'b' equal to 0 and 1, then iterates while 'a' is less than 'n', appending 'a' to the list, 'result' and setting 'a' and 'b' equal to 'b' and 'a' plus 'b'. Then, it should return the list, 'result'.",
+                "sample": "def fib2(n):\n    result = []\n    a, b = 0, 1\n    while a < n:\n        result.append(a)\n        a, b = b, a+b\n    return result",
+                "check": "def +fib2 *\\( *n *\\) *: *\n(\\t|(    ))result *= *\\[ *\\] *\n(\\t|(    ))a *, *b *= *0 *, *1 *\n(\\t|(    ))while +a *< *n *: *\n(\\t|(    ))(\\t|(    ))result *\\. *append *\\( *a *\\) *\n(\\t|(    ))(\\t|(    ))a *, *b *= *b *, *a *\\+ *b *\n(\\t|(    ))return +result *"
+            },
+            {
+                "subject": "Part I",
+                "module": "Defining Functions",
+                "challenge": "Define a function called 'add' which takes arguments 'a' and 'b' and outputs the sum of the two. Set the default values for and 'a' and 'b' to 1 and 2, respectively.",
+                "sample": "def (a=1,b=2):\n    return a + b",
+                "check": "def +\\( *a *= *1 *, *b *= *2 *\\) *: *\n(\\t|(    ))return +a *\\+ *b *"
+            },
+            {
+                "subject": "Part I",
+                "module": "Defining Functions",
+                "challenge": "If \n\ndef f(a, L=None):\n    if L is None:\n        L = []\n    L.append(a)\n    return L\n\nWhat will be the output of the following function calls?\n\nf(1)\nf(2)\nf(3)",
+                "sample": "[1]\n[2]\n[3]",
+                "check": "\\[1\\]\n\\[2\\]\n\\[3\\]"
+            },
+            {
+                "subject": "Part I",
+                "module": "Defining Functions",
+                "challenge": "Use the function,\n\ndef f(a, L=[]):\n    L.append(a)\n    return L\n\nto output\n\n[1]\n[1, 2]\n[1, 2, 3]\n\nHint: You will need to use the function three times.",
+                "sample": "print f(1)\nprint f(2)\nprint f(3)",
+                "check": "print +f\\( *1 *\\) *\nprint +f\\( *2 *\\) *\nprint +f\\( *3 *\\) *",
+                "output": "[1]\n[1,2]\n[1,2,3]"
+            },
+            {
+                "subject": "Part I",
+                "module": "Defining Functions",
+                "challenge": "Create a function called 'placeholder' that does absolutely nothing.",
+                "sample": "def placeholder():\n    pass",
+                "check": "def +placeholder\\(\\) *: *\n(    |\\t)pass"
+            },
+            {
+                "subject": "Part I",
+                "module": "Defining Functions",
+                "challenge": "Call the function, parrot, which sets the arguments, voltage and state equal to 1000 and 'a stiff', respectively, no matter what order they are in in the function.",
+                "sample": "parrot(voltage=1000, state='a stiff')",
+                "check": "parrot *\\( *voltage *= *1000 *, *state *= *('|\")a stiff('|\")\\) *",
+                "output": "This parrot wouldn't voom if you put 1000 volts through it. It's a stiff!"
+            },
+            {
+                "subject": "Part I",
+                "module": "Defining Functions",
+                "challenge": "For the function\n\ndef myfunc(*arguments,**keywords):\n    print arguments\n    print keywords\n\nwhat will be returned when called with these arguments?\n\nmyfunc('hi','hello',greetings='hola',salutations='welcome')  ",
+                "sample": "('hi', 'hello')\n{'greetings': 'hola', 'salutations': 'welcome'}",
+                "check": "\\('hi', 'hello'\\)\n{'greetings': 'hola', 'salutations': 'welcome'}"
+            },
+            {
+                "subject": "Part I",
+                "module": "Defining Functions",
+                "challenge": "Create a function called 'myfunc' that sets the first argument to the variable, 'kind', outputs the arguments and then keywords passed into the function.",
+                "sample": "def myfunc(kind,*arguments,**keywords):\n    print *arguments\n    print **keywords",
+                "check": "def +myfunc *\\( *kind *, *\\*arguments *, *\\*\\*keywords\\) *: *\n    print +\\*arguments *\n    print +\\*\\*keywords *"
+            }
+        ],
+        "More Lists": [
+            {
+                "subject": "Part I",
+                "module": "More Lists",
+                "challenge": "Add x to then end of mylist",
+                "sample": "mylist.append(x)",
+                "check": "mylist *\\. *append *\\( *x *\\) *"
+            },
+            {
+                "subject": "Part I",
+                "module": "More Lists",
+                "challenge": "Append all items from the list mylist2 to mylist.",
+                "sample": "mylist.extend(mylist2)",
+                "check": "mylist *\\. *extend *\\( *mylist2 *\\) *"
+            },
+            {
+                "subject": "Part I",
+                "module": "More Lists",
+                "challenge": "Insert the item, myitem, into the list, mylist, as the seventh item.",
+                "sample": "myitem.insert(6, myitem)",
+                "check": "myitem *\\. *insert *\\( *6 *, *myitem *\\) *"
+            },
+            {
+                "subject": "Part I",
+                "module": "More Lists",
+                "challenge": "Remove the item from the list, mylist, of the index, 3, outputting the removed item.",
+                "sample": "mylist.remove(3)",
+                "check": "mylist *\\. *remove *\\( *3 *\\) *",
+                "output": "1234.5"
+            },
+            {
+                "subject": "Part I",
+                "module": "More Lists",
+                "challenge": "Remove and return the last item from the list, mylist.",
+                "sample": "mylist.pop()",
+                "check": "mylist *\\. *pop *\\( *\\) *",
+                "output": "'the item'"
+            },
+            {
+                "subject": "Part I",
+                "module": "More Lists",
+                "challenge": "Output the index of the first item of the value, 100, in the list, mylist.",
+                "sample": "mylist.index(100)",
+                "check": "mylist *\\. *index *\\( *100 *\\) *",
+                "output": "1"
+            },
+            {
+                "subject": "Part I",
+                "module": "More Lists",
+                "challenge": "Sort the list, mylist.",
+                "sample": "mylist.sort()",
+                "check": "mylist *\\. *sort *\\( *\\) *"
+            },
+            {
+                "subject": "Part I",
+                "module": "More Lists",
+                "challenge": "Reverse the elements of the list, mylist.",
+                "sample": "mylist.reverse()",
+                "check": "mylist *\\. *reverse *\\( *\\) *"
+            },
+            {
+                "subject": "Part I",
+                "module": "More Lists",
+                "challenge": "Initiate the variable, queue, as a list optimized with the ability of quickly removing elements from the end or beginning of the list, with the elements, \"Eric\", \"John\", and \"Michael\".",
+                "sample": "queue = deque([\"Eric\", \"John\", \"Michael\"])",
+                "check": "queue *= *deque *\\(\\[('|\")Eric('|\") *, *(\"|')John(\"|') *, *('|\")Michael('|\") *\\] *\\) *"
+            },
+            {
+                "subject": "Part I",
+                "module": "More Lists",
+                "challenge": "Remove the first item from the queue, queue.",
+                "sample": "queue.popleft()",
+                "check": "queue *\\. *popleft *\\( *\\) *",
+                "output": "'Eric'"
+            },
+            {
+                "subject": "Part I",
+                "module": "More Lists",
+                "challenge": "Define a function, add, which takes two arguments and returns the sum of these two numbers. Then, use this function to sum the total of the range of numbers from 1 to 11.",
+                "sample": "def add(x,y): return x+y\nreduce(add, range(1, 11))",
+                "check": "def +add *\\( *(\\w+) *, *(\\w+) *\\) *: +\\n?return +((\\1 *\\+ *\\2)|(\\2 *\\+ *\\1)) *\nreduce *\\( *add *, *range *\\( *1 *, *11 *\\) *\\) *",
+                "output": "55"
+            },
+            {
+                "subject": "Part I",
+                "module": "More Lists",
+                "challenge": "Define a function, cube, that takes an argument and returns the cube. Then use this function to output the cube of all values in the range 1 through 11, as a list.",
+                "sample": "def cube(x): return x**3\nmap(cube, range(1,11))",
+                "output": "[1, 8, 27, 64, 125, 216, 343, 512, 729, 1000]",
+                "check": "def +cube *\\( *(\\w+) *\\) *: +return +((\\1\\*\\*3)|(\\1\\*\\1\\*\\1)) *\nmap *\\( *cube *, *range *\\( *1 *, *11 *\\) *\\) *"
+            },
+            {
+                "challenge": "Define a function, which takes the argument, and returns true if the remainder of the argument divided by three is 0 or the remainder of the argument divided by 5 is zero.\n\nThen output the range of numbers 2 through 25, using this function as a filter.",
+                "sample": "def f(x): return x % 3 == 0  or x % 5 == 0\nfilter(f, range(2, 25))",
+                "check": "def +(\\w+) *\\( *(\\w+) *\\) *: *return +((\\2 *% *3 *== *0 +or +\\2 *% *5)|(\\2 *% *5 *== *0 +or +\\2 *% *3)) *== *0 *\nfilter *\\( *\\1 *, *range *\\( *2 *, *25 *\\) *\\) *",
+                "subject": "Part I",
+                "module": "More Lists",
+                "output": "[3, 5, 6, 9, 10, 12, 15, 18, 20, 21, 24]"
+            },
+            {
+                "subject": "Part I",
+                "module": "More Lists",
+                "challenge": "Remove the first item from the list, mylist, whose value is 3",
+                "sample": "mylist.remove(3)",
+                "check": "mylist *\\. *remove *\\( *3 *\\) *"
+            }
+        ],
+        "List Comprehensions": [
+            {
+                "subject": "Part I",
+                "module": "List Comprehensions",
+                "challenge": "With the list, vec = [-4, -2, 0, 2, 4], output a list with the values doubled.",
+                "sample": "[x*2 for x in vec]",
+                "check": "\\[(\\w+) *\\* *2 *for +\\1 +in +vec *\\] *",
+                "output": "[-8, -4, 0, 4, 8]"
+            },
+            {
+                "subject": "Part I",
+                "module": "List Comprehensions",
+                "challenge": "Comprehend the following code to one line\n\nsquares = []\nfor x in range(10):\n    squares.append(x**2)",
+                "sample": "squares = [x**2 for x in range(10)]",
+                "check": "squares *= *\\[ *(\\w+) *\\*\\* *2 *for +\\1 +in +range *\\( *10 *\\) *\\] *",
+                "output": "[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]"
+            },
+            {
+                "subject": "Part I",
+                "module": "List Comprehensions",
+                "challenge": "Output all values greater than or equal to 0 in the list, vec, as a list",
+                "sample": "[x for x in vec if x >= 0]",
+                "check": "\\[(\\w+) +for +\\1 +in +vec +if +\\1 *>= *0 *\\] *",
+                "output": "[0, 2, 4]"
+            },
+            {
+                "subject": "Part I",
+                "module": "List Comprehensions",
+                "challenge": "Comprehend the following code to one line.\ncombs = []\nfor x in [1,2,3]:\n    for y in [3,1,4]:\n        if x != y:\n            combs.append((x, y))\ncombs",
+                "sample": "[(x, y) for x in [1,2,3] for y in [3,1,4] if x != y]",
+                "check": "\\[ *\\( *(\\w+) *, *(\\w+) *\\) *for +\\1 +in *\\[ *1 *, *2 *, *3 *\\] *for +\\2 +in *\\[ *3 *, *1 *, *4 *\\] *if +\\1 *!= *\\2 *\\] *",
+                "output": "[(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)]"
+            },
+            {
+                "subject": "Part I",
+                "module": "List Comprehensions",
+                "challenge": "Define a function that takes in a list, creates a function which takes two arguments and adds them together, and returns that list, reduced, using the function you created, the list passed in, and initiates to 0, effectively, summing any list passed in.",
+                "sample": "def sum(seq):\n    def add(x,y): return x + y\n    return reduce(add, seq, 0)",
+                "check": "def +\\w+ *\\( *(\\w+) *\\) *: *\n( +|\\t)def +(\\w+) *\\( *(\\w+) *,(\\w+) *\\) *: *(\\n\\2\\2)?return +\\4 *\\+ *\\5 *\n\\2return +reduce *\\( *\\3 *, *\\1 *, *0 *\\) *"
+            }
+        ]
+    }
+}

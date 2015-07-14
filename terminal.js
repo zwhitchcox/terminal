@@ -43,10 +43,10 @@ angular.module('cli').directive('terminal', function() {
         $scope.full = false;
         $scope.togglePartiallyFull = function() {
           if ($scope.termClass !== 'full') {
-              $('.navbar').css('display', 'none')
-              $element.css('border-radius','0px')
-              $element.css('height','')
-              $scope.termClass = 'full'
+            $('.navbar').css('display', 'none')
+            $element.css('border-radius','0px')
+            $element.css('height','')
+            $scope.termClass = 'full'
           } else {
             $('.navbar').css('display', 'block')
             $element.css('border-radius','12px')
