@@ -9,11 +9,16 @@
     '$scope', '$http', 'Exercises', function($scope, $http, Exercises) {
       var cmds, getRandomExercise, getSubject, play, play2, setModule, showModules, subjectOptions, termCmd;
       $scope.init = function() {
+        if (/cli/i.test($routeParams.tech)) {
+          $scope.url = 'clis';
+        } else if (/python/i.test($routeParams.tech)) {
+          $scope.url = 'pythons';
+        }
         $scope.processCmd = getSubject;
-        if (localStorage['clis'] !== void 0) {
-          return $scope.subjects = JSON.parse(localStorage['clis']);
+        if (localStorage[$scope.url] !== void 0) {
+          return $scope.subjects = JSON.parse(localStorage[$scope.url]);
         } else {
-          return $http.get('/clis.json').success(function(data) {
+          return $http.get("/" + $scope.url + ".json").success(function(data) {
             return $scope.subjects = data;
           });
         }

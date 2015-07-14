@@ -2,11 +2,15 @@
 cli = angular.module('cli',['ngResource'])
 cli.controller('Ctrl', ['$scope','$http','Exercises',($scope,$http,Exercises) ->
   $scope.init = ->
+    if /cli/i.test $routeParams.tech
+      $scope.url = 'clis'
+    else if /python/i.test $routeParams.tech
+      $scope.url = 'pythons'
     $scope.processCmd = getSubject
-    if localStorage['clis']!= undefined
-      $scope.subjects = JSON.parse(localStorage['clis'])
+    if localStorage[$scope.url]!= undefined
+      $scope.subjects = JSON.parse(localStorage[$scope.url])
     else 
-      $http.get('/clis.json')
+      $http.get("/#{$scope.url}.json")
         .success((data)->
           $scope.subjects = data
         )
