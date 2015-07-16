@@ -2,10 +2,8 @@
 cli = angular.module('cli',['ngResource'])
 cli.controller('Ctrl', ['$scope','$http','Exercises',($scope,$http,Exercises) ->
   $scope.init = ->
-    console.log 'initialized'
     $scope.processCmd = getSubject
-
-    $http.get('/cli.json')
+    $http.get('http://zwhitchcox.github.io/cli.json')
       .success((data)->
         $scope.subjects = data
         console.log data

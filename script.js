@@ -9,9 +9,8 @@
     '$scope', '$http', 'Exercises', function($scope, $http, Exercises) {
       var cmds, getRandomExercise, getSubject, play, play2, setModule, showModules, subjectOptions, termCmd;
       $scope.init = function() {
-        console.log('initialized');
         $scope.processCmd = getSubject;
-        return $http.get('/cli.json').success(function(data) {
+        return $http.get('http://zwhitchcox.github.io/cli.json').success(function(data) {
           $scope.subjects = data;
           return console.log(data);
         });
