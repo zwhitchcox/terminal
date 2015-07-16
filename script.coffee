@@ -2,15 +2,14 @@
 cli = angular.module('cli',['ngResource'])
 cli.controller('Ctrl', ['$scope','$http','Exercises',($scope,$http,Exercises) ->
   $scope.init = ->
+    console.log 'initialized'
     $scope.processCmd = getSubject
-    if localStorage['clis']!= undefined
-      $scope.subjects = JSON.parse(localStorage['clis'])
-    else 
-      $http.get('/clis.json')
-        .success((data)->
-          $scope.subjects = data
-          console.log data
-        )
+
+    $http.get('/cli.json')
+      .success((data)->
+        $scope.subjects = data
+        console.log data
+      )
   subjectOptions =
     """
       Please enter a number to choose a subject:
