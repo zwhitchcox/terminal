@@ -11,8 +11,7 @@
       $scope.init = function() {
         $scope.processCmd = getSubject;
         return $http.get('cli.json').success(function(data) {
-          $scope.subjects = data;
-          return console.log(data);
+          return $scope.subjects = data;
         });
       };
       subjectOptions = "Please enter a number to choose a subject:\n\n 1: Unix    (Mac/Linux)\n 2: MS DOS  (Windows)\n 3: Git\n\n Use 'help' to show the help\n";
