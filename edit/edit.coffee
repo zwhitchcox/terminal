@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('EditCtrl',['$scope','$http','$routeParams','curx', ($scope,$http,$routeParams,curx) ->
+angular.module('app').controller('EditCtrl',['$scope','$http','$routeParams', ($scope,$http,$routeParams) ->
   $scope.asubj = {active:''}
   if /cli/i.test $routeParams.tech
       $scope.url = 'clis'
@@ -8,7 +8,6 @@ angular.module('app').controller('EditCtrl',['$scope','$http','$routeParams','cu
     $scope.url = 'pythons'
   $scope.getExercises = () ->
     if localStorage[$scope.url]!= undefined
-      console.log JSON.parse(localStorage[$scope.url])
       $scope.subjects = JSON.parse(localStorage[$scope.url])
     else 
       $scope.resetExercises()

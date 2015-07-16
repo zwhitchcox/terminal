@@ -6,6 +6,10 @@ app.config(['$routeProvider',
       templateUrl: 'list.html',
       controller: 'EditCtrl'
     }).
+    when('modules/:tech', {
+      templateUrl: 'order.html',
+      controller: 'OrderCtrl'
+    }).
     otherwise({
       redirectTo: '/'
     })
@@ -25,7 +29,3 @@ app.config(['$routeProvider',
     return result;
   };
 })
-.factory('curx',[function(){
-  var exercise = {}
-  return exercise
-}])

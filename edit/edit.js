@@ -2,7 +2,7 @@
 (function() {
   'use strict';
   angular.module('app').controller('EditCtrl', [
-    '$scope', '$http', '$routeParams', 'curx', function($scope, $http, $routeParams, curx) {
+    '$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
       $scope.asubj = {
         active: ''
       };
@@ -13,7 +13,6 @@
       }
       $scope.getExercises = function() {
         if (localStorage[$scope.url] !== void 0) {
-          console.log(JSON.parse(localStorage[$scope.url]));
           $scope.subjects = JSON.parse(localStorage[$scope.url]);
         } else {
           $scope.resetExercises();

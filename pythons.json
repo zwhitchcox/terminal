@@ -218,6 +218,27 @@
                 "challenge": "Set the list, 'b', to be a list of the lists, 'c', 'd', and 'e'",
                 "sample": "b = [c,d,e]",
                 "check": "b *= *\\[ *c *, *d *, *e *\\] *"
+            },
+            {
+                "subject": "Part I",
+                "module": "Lists",
+                "challenge": "Delete the element at position 0 in the list, a.",
+                "sample": "del a[0]",
+                "check": "del +a *\\[ *0 *\\] *"
+            },
+            {
+                "subject": "Part I",
+                "module": "Lists",
+                "challenge": "Delete the third and fourth elements from the list, a",
+                "sample": "del a[2:4]",
+                "check": "del +a *\\[ *2 *: *4 *\\] *"
+            },
+            {
+                "subject": "Part I",
+                "module": "Lists",
+                "challenge": "Delete all elements from the list, a",
+                "sample": "del a[:]",
+                "check": "del +a *\\[ *: *\\] *"
             }
         ],
         "Flow of Control": [
@@ -226,7 +247,7 @@
                 "module": "Flow of Control",
                 "challenge": "Input an if statement the outputs, 'Negative' if x is less than 0, 'Zero', if x is 0, 'Single', if x is 1, and 'More' for anything else. Please put the conditionals in that order.",
                 "sample": "if x < 0:\n    x = 0\n    print 'Negative'\n    elif x == 0:\n        print 'Zero'\n    elif x == 1:\n        print 'Single'\n    else:\n        'More'",
-                "check": "if +x *< *0 *: *\n(\\t|(    ))x *= *0 *\n(\\t|(    ))print +('|\")Negative('|\") *\n(\\t|(    ))elif +x *== *0 *: *\n(\\t|(    ))(\\t|(    ))print +('|\")Zero('|\") *\n(\\t|(    ))elif +x *== *1 *: *\n(\\t|(    ))(\\t|(    ))print +'Single' *\n(\\t|(    ))else *: *\n(\\t|(    ))(\\t|(    ))('|\")More('|\") *",
+                "check": "if +x *< *0 *: *\n(\\t| +)x *= *0 *\n\\1print +('|\")Negative\\2 *\n\\1elif +x *== *0 *: *\n\\1\\1print +('|\")Zero\\3 *\n\\1elif +x *== *1 *: *\n\\1\\1print +'Single' *\n\\1else *: *\n\\1\\1('|\")More\\4 *",
                 "output": "More"
             },
             {
@@ -234,7 +255,7 @@
                 "module": "Flow of Control",
                 "challenge": "Print the value and the length of the value for each item in the list, 'words' (['cat', 'window', 'defenestrate'])",
                 "sample": "for w in words:\n    print w, len(w)",
-                "check": "for +w +in +words *: *\n(\\t|(    ))print +w *, *len *\\( *w *\\) *",
+                "check": "for +w +in +words *: *\n(\\t|( +))print +w *, *len *\\( *w *\\) *",
                 "output": "cat 3\nwindow 6\ndefenestrate 12"
             },
             {
@@ -266,14 +287,14 @@
                 "module": "Flow of Control",
                 "challenge": "Output every the index of every item in the list, 'a', followed by the value (the list is ['Mary', 'had', 'a', 'little', 'lamb']).",
                 "sample": "for i in range(len(a)):\n    print i, a[i]",
-                "check": "for +i +in +range *\\( *len *\\( *a *\\) *\\) *: *\n(\\t|( + + + +))print +i *, *a *\\[ *i *\\] *",
+                "check": "for +i +in +range *\\( *len *\\( *a *\\) *\\) *: *\n(\\t|( +))print +i *, *a *\\[ *i *\\] *",
                 "output": "0 Mary\n1 had\n2 a\n3 little\n4 lamb"
             },
             {
                 "subject": "Part I",
                 "module": "Flow of Control",
                 "sample": "for n in range(2, 10):\n    for x in range(2, n):\n        if n % x == 0:\n            print n, 'equals', x, '*', n/x\n            break\n        else:\n        print n, 'is a prime number'",
-                "check": "for +n +in +range *\\( *2, *10 *\\) *: *\n(\\t|(    ))for +x +in +range *\\( *2 *, *n *\\) *: *\n(\\t|(    ))(\\t|(    ))if +n *% *x *== *0 *: *\n(\\t|(    ))(\\t|(    ))(\\t|(    ))print +n *, *'equals' *, *x *, *'\\*' *, *n *\\/ *x *\n(\\t|(    ))(\\t|(    ))(\\t|(    ))break *\n(\\t|(    ))(\\t|(    ))else *: *\n(\\t|(    ))(\\t|(    ))print +n *, *'is a prime number' *",
+                "check": "for +n +in +range *\\( *2, *10 *\\) *: *\n(\\t|( +))for +x +in +range *\\( *2 *, *n *\\) *: *\n\\1\\1if +n *% *x *== *0 *: *\n\\1\\1\\1print +n *, *'equals' *, *x *, *'\\*' *, *n *\\/ *x *\n\\1\\1\\1break *\n\\1\\1else *: *\n\\1\\1print +n *, *'is a prime number' *",
                 "challenge": "Create a for loop that iterates n from 2 through 10, with a nested for loop that iterates x from 2 through n. If quotient of n divided by x is a whole number, break the nested for loop, and output, 'n equals x * n/x' (replacing the variables with their values). If there are no whole number multiples in the range, output 'n is a prime number'.",
                 "output": "2 is a prime number\n3 is a prime number\n4 equals 2 * 2\n5 is a prime number\n6 equals 2 * 3\n7 is a prime number\n8 equals 2 * 4\n9 equals 3 * 3"
             },
@@ -282,7 +303,7 @@
                 "module": "Flow of Control",
                 "challenge": "Iterate 'num' from 2 through 10. If the quotient of num divided by two has no remainder, output \"Found an even number\", followed by the number, continue looping without executing the rest of the statement.  If there is a remainder, output, \"Found a number\", followed by the number.",
                 "sample": "for num in range(2, 10):\n    if num % 2 == 0:\n        print \"Found an even number\", num\n            continue\n        print \"Found a number\", num",
-                "check": "for +num +in +range *\\( *2 *, *10 *\\) *: *\n(\\t|(    ))if +num *% *2 *== *0 *: *\n(\\t|(    ))(\\t|(    ))print +(\"|')Found an even number(\"|') *, *num *\n(\\t|(    ))(\\t|(    ))(\\t|(    ))continue *\n(\\t|(    ))(\\t|(    ))print +('|\")Found a number(\"|') *, *num *",
+                "check": "for +num +in +range *\\( *2 *, *10 *\\) *: *\n(\\t|( +))if +num *% *2 *== *0 *: *\n\\1\\1print +(\"|')Found an even number(\"|') *, *num *\n\\1\\1\\1continue *\n\\1\\1print +('|\")Found a number(\"|') *, *num *",
                 "output": "Found an even number 2\nFound a number 3\nFound an even number 4\nFound a number 5\nFound an even number 6\nFound a number 7\nFound an even number 8\nFound a number 9"
             },
             {
@@ -297,7 +318,7 @@
                 "module": "Flow of Control",
                 "challenge": "Create a minimal class called, 'MyEmptyClass'",
                 "sample": "class MyEmptyClass:\n    pass",
-                "check": "class +MyEmptyClass *: *\n    pass *"
+                "check": "class +MyEmptyClass *: *\n( +|\\t)pass *"
             }
         ],
         "Defining Functions": [
@@ -306,21 +327,21 @@
                 "module": "Defining Functions",
                 "challenge": "Create a function called 'fib' that takes in the argument, 'n'. It then declares variables 'a' and 'b' to be 0 and 1, respectively, on the same line.\n\nNext, it should iterate while a is less than n, printing 'a'. It should also set a equal to b and b equal to a plus b.",
                 "sample": "def fib(n):\n    a, b = 0, 1\n    while a < n:\n        print a\n        a, b = b, a+b",
-                "check": "def +fib *\\( *n *\\) *: *\n    a *, *b *= *0 *, *1 *\n    while +a *< *n *: *\n        print +a *\n        a *, *b *= *b *, *a *\\+ *b *"
+                "check": "def +fib *\\( *n *\\) *: *\n( +|\\t)a *, *b *= *0 *, *1 *\n\\1while +a *< *n *: *\n\\1\\1print +a *\n\\1\\1a *, *b *= *b *, *a *\\+ *b *"
             },
             {
                 "subject": "Part I",
                 "module": "Defining Functions",
                 "challenge": "Create a function called fib2 that takes a variable, 'n', sets 'result' equal to an empty list, sets 'a' and 'b' equal to 0 and 1, then iterates while 'a' is less than 'n', appending 'a' to the list, 'result' and setting 'a' and 'b' equal to 'b' and 'a' plus 'b'. Then, it should return the list, 'result'.",
                 "sample": "def fib2(n):\n    result = []\n    a, b = 0, 1\n    while a < n:\n        result.append(a)\n        a, b = b, a+b\n    return result",
-                "check": "def +fib2 *\\( *n *\\) *: *\n(\\t|(    ))result *= *\\[ *\\] *\n(\\t|(    ))a *, *b *= *0 *, *1 *\n(\\t|(    ))while +a *< *n *: *\n(\\t|(    ))(\\t|(    ))result *\\. *append *\\( *a *\\) *\n(\\t|(    ))(\\t|(    ))a *, *b *= *b *, *a *\\+ *b *\n(\\t|(    ))return +result *"
+                "check": "def +fib2 *\\( *n *\\) *: *\n(\\t|( +))result *= *\\[ *\\] *\n\\1a *, *b *= *0 *, *1 *\n\\1while +a *< *n *: *\n\\1\\1result *\\. *append *\\( *a *\\) *\n\\1\\1a *, *b *= *b *, *a *\\+ *b *\n\\1return +result *"
             },
             {
                 "subject": "Part I",
                 "module": "Defining Functions",
                 "challenge": "Define a function called 'add' which takes arguments 'a' and 'b' and outputs the sum of the two. Set the default values for and 'a' and 'b' to 1 and 2, respectively.",
                 "sample": "def (a=1,b=2):\n    return a + b",
-                "check": "def +\\( *a *= *1 *, *b *= *2 *\\) *: *\n(\\t|(    ))return +a *\\+ *b *"
+                "check": "def +\\( *a *= *1 *, *b *= *2 *\\) *: *\n(\\t|( +))return +a *\\+ *b *"
             },
             {
                 "subject": "Part I",
@@ -364,7 +385,7 @@
                 "module": "Defining Functions",
                 "challenge": "Create a function called 'myfunc' that sets the first argument to the variable, 'kind', outputs the arguments and then keywords passed into the function.",
                 "sample": "def myfunc(kind,*arguments,**keywords):\n    print *arguments\n    print **keywords",
-                "check": "def +myfunc *\\( *kind *, *\\*arguments *, *\\*\\*keywords\\) *: *\n    print +\\*arguments *\n    print +\\*\\*keywords *"
+                "check": "def +myfunc *\\( *kind *, *\\*arguments *, *\\*\\*keywords\\) *: *\n(\\s+|\\t)print +\\*arguments *\n\\1print +\\*\\*keywords *"
             }
         ],
         "More Lists": [
@@ -502,7 +523,7 @@
             {
                 "subject": "Part I",
                 "module": "List Comprehensions",
-                "challenge": "Comprehend the following code to one line.\ncombs = []\nfor x in [1,2,3]:\n    for y in [3,1,4]:\n        if x != y:\n            combs.append((x, y))\ncombs",
+                "challenge": "Comprehend the following code to one line:\n\ncombs = []\nfor x in [1,2,3]:\n    for y in [3,1,4]:\n        if x != y:\n            combs.append((x, y))\ncombs",
                 "sample": "[(x, y) for x in [1,2,3] for y in [3,1,4] if x != y]",
                 "check": "\\[ *\\( *(\\w+) *, *(\\w+) *\\) *for +\\1 +in *\\[ *1 *, *2 *, *3 *\\] *for +\\2 +in *\\[ *3 *, *1 *, *4 *\\] *if +\\1 *!= *\\2 *\\] *",
                 "output": "[(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)]"
@@ -513,6 +534,196 @@
                 "challenge": "Define a function that takes in a list, creates a function which takes two arguments and adds them together, and returns that list, reduced, using the function you created, the list passed in, and initiates to 0, effectively, summing any list passed in.",
                 "sample": "def sum(seq):\n    def add(x,y): return x + y\n    return reduce(add, seq, 0)",
                 "check": "def +\\w+ *\\( *(\\w+) *\\) *: *\n( +|\\t)def +(\\w+) *\\( *(\\w+) *,(\\w+) *\\) *: *(\\n\\2\\2)?return +\\4 *\\+ *\\5 *\n\\2return +reduce *\\( *\\3 *, *\\1 *, *0 *\\) *"
+            },
+            {
+                "subject": "Part I",
+                "module": "List Comprehensions",
+                "challenge": "Output the following list as a flattened list using list comprehension:\n\nvec = [[1,2,3], [4,5,6], [7,8,9]]",
+                "sample": "[num for elem in vec for num in elem]",
+                "check": "\\[ *(\\w+) +for +(\\w+) +in +vec +for +\\1 +in +\\2 *\\] *",
+                "output": "[1, 2, 3, 4, 5, 6, 7, 8, 9]"
+            },
+            {
+                "subject": "Part I",
+                "module": "List Comprehensions",
+                "challenge": "Output 0 through 5 as a comprehended list of tuples in the format, \"x, x^2\".",
+                "sample": "[(x, x**2) for x in range(6)",
+                "check": "\\[ *\\( *(\\w+) *, *\\1 *\\*\\* *2 *\\) *for +x +in +range *\\( *6 *\\) *",
+                "output": "[(0, 0), (1, 1), (2, 4), (3, 9), (4, 16), (5, 25)]"
+            },
+            {
+                "subject": "Part I",
+                "module": "List Comprehensions",
+                "challenge": "Output a transposed matrix of the matrix, matrix:\n\nmatrix = [\n    [1, 2, 3, 4],\n    [5, 6, 7, 8],\n    [9, 10, 11, 12],\n]",
+                "sample": "[[row[i] for row in matrix] for i in range(4)]",
+                "check": "\\[ *\\[ *row *\\[ *i *\\] *for +row +in +matrix *\\] *for +i +in +range *\\( *4 *\\) *\\] *",
+                "output": "[[1, 5, 9], [2, 6, 10], [3, 7, 11], [4, 8, 12]]"
+            },
+            {
+                "subject": "Part I",
+                "module": "List Comprehensions",
+                "challenge": "You should prefer built-in function to complex flow statements. Use the built-in function to output the transpose of the matrix, matrix",
+                "sample": "zip(*matrix)",
+                "check": "zip *\\( *\\* *matrix *\\) *",
+                "output": "[[1, 5, 9], [2, 6, 10], [3, 7, 11], [4, 8, 12]]"
+            }
+        ],
+        "Tuples, Sets, and Dictionaries": [
+            {
+                "subject": "Part I",
+                "module": "Tuples, Sets, and Dictionaries",
+                "challenge": "Create a tuple (an immutable (can't be altered) list), consisting of the elements, 1, 2, 3, and 4.",
+                "sample": "x = 1, 2, 3, 4",
+                "check": "\\w+ *= *(\\) *)?1 *, *2 *, *3 *, *4( *\\))? *"
+            },
+            {
+                "subject": "Part I",
+                "module": "Tuples, Sets, and Dictionaries",
+                "challenge": "Assign the variables x, y, and z to the elements of the tuple, t (this is known as sequence unpacking)",
+                "sample": "x, y, z = t",
+                "check": "(\\( *)?x *, *y *, *z( *\\))? *= *t *"
+            },
+            {
+                "subject": "Part I",
+                "module": "Tuples, Sets, and Dictionaries",
+                "challenge": "Cast the list, basket, to the data type characterized by fast membership testing and no duplicates. \n\nbasket = ['apple', 'orange', 'apple', 'pear', 'orange', 'banana']",
+                "output": "set(['orange', 'pear', 'apple', 'banana'])",
+                "sample": "set(basket)",
+                "check": "set *\\( *basket *\\) *"
+            },
+            {
+                "subject": "Part I",
+                "module": "Tuples, Sets, and Dictionaries",
+                "challenge": "Output whether or not 'orange' is in the set, fruit.",
+                "sample": "'orange' in fruit",
+                "check": "('|\")orange('|\") *in +fruit *",
+                "output": "True"
+            },
+            {
+                "subject": "Part I",
+                "module": "Tuples, Sets, and Dictionaries",
+                "challenge": "Output whether or not 'orange' is in the set, fruit.",
+                "sample": "'orange' in fruit",
+                "check": "('|\")orange('|\") *in +fruit *",
+                "output": "True"
+            },
+            {
+                "subject": "Part I",
+                "module": "Tuples, Sets, and Dictionaries",
+                "challenge": "Output the unique values in the string, 'abracadabra', using the data type generally known to do that sort of thing.",
+                "sample": "set('abracadabra')",
+                "check": "set *\\( *('|\")abracadabra('|\") *\\) *",
+                "output": "set(['a', 'r', 'b', 'c', 'd'])"
+            },
+            {
+                "subject": "Part I",
+                "module": "Tuples, Sets, and Dictionaries",
+                "challenge": "Use a set comprehension to create a set of all values not 'a', 'b', or 'c'.",
+                "sample": "{x for x in 'abracadabra' if x not in 'abc'}",
+                "check": "\\{ *(\\w+) +for +\\1 +in *('|\")abracadabra('|\") *if +\\1 +not +in *('|\")abc('|\") *\\} *",
+                "output": "set(['r', 'd'])"
+            },
+            {
+                "subject": "Part I",
+                "module": "Tuples, Sets, and Dictionaries",
+                "challenge": "Output a dictionary with key values, a:1, b:2, c:3",
+                "sample": "{'a':1, 'b':2, 'c':3}",
+                "check": "\\{ *((?:(?:'|\")a(?:'|\") *: *1)|(?:(?:'|\")b(?:'|\") *: *2)|(?:(?:'|\")c(?:'|\") *: *3)) *, *(?!\\1)((?:(?:'|\")a(?:'|\") *: *1)|(?:(?:'|\")b(?:'|\") *: *2)|(?:(?:'|\")c(?:'|\") *: *3)) *, *(?!\\1|\\2)((('|\")a('|\") *: *1)|(('|\")b('|\") *: *2)|(('|\")c('|\") *: *3)) *\\} *",
+                "output": "{'a': 1, 'c': 3, 'b': 2}"
+            },
+            {
+                "subject": "Part I",
+                "module": "Tuples, Sets, and Dictionaries",
+                "challenge": "Set the element with the key, 'irv', in the dictionary, tel, to the value 4127.",
+                "sample": "tel['guido'] = 4127",
+                "check": "tel *\\[ *('|\")guido\\1 *\\] *= *4127 *"
+            },
+            {
+                "subject": "Part I",
+                "module": "Tuples, Sets, and Dictionaries",
+                "challenge": "Output the value of 'jack' from the dictionary, tel.",
+                "sample": "tel['jack']",
+                "check": "tel *\\[ *('|\")jack\\1 *\\] *",
+                "output": "4098"
+            },
+            {
+                "subject": "Part I",
+                "module": "Tuples, Sets, and Dictionaries",
+                "challenge": "Delete the item, 'jack', from the dictionary, tel.",
+                "sample": "del tel['jack']",
+                "check": "del +tel *\\[ *('|\")jack\\1 *\\] *"
+            },
+            {
+                "subject": "Part I",
+                "module": "Tuples, Sets, and Dictionaries",
+                "challenge": "Output the keys of the dictionary, tel",
+                "sample": "tel.keys()",
+                "check": "tel *\\. *keys *\\( *\\) *",
+                "output": "['guido', 'irv', 'jack']"
+            },
+            {
+                "subject": "Part I",
+                "module": "Tuples, Sets, and Dictionaries",
+                "challenge": "Output whether or not the key, 'guido', is in the dictionary, tel.",
+                "sample": "'guido' in tel",
+                "check": "('|\")guido\\1 *in +tel *",
+                "output": "True"
+            },
+            {
+                "subject": "Part I",
+                "module": "Tuples, Sets, and Dictionaries",
+                "challenge": "Output a dictionary from the the following list:\n\nx = [('sape', 4139), ('guido', 4127), ('jack', 4098)]",
+                "sample": "dict(x)",
+                "check": "dict *\\( *x *\\) *",
+                "output": "{'sape': 4139, 'jack': 4098, 'guido': 4127}"
+            },
+            {
+                "subject": "Part I",
+                "module": "Tuples, Sets, and Dictionaries",
+                "challenge": "Create a dictionary using the equal operator, with the values, sape: 4139 and guido: 4127.",
+                "sample": "dict(sape=4139,guido=4127)",
+                "check": "dict *\\( *((?:sape *= *4139)|(?:guido *= *4127)) *, *(?!\\1)((?:sape *= *4139)|(?:guido *= *4127)) *\\) *",
+                "output": "{'sape': 4139, 'guido': 4127}"
+            },
+            {
+                "subject": "Part I",
+                "module": "Tuples, Sets, and Dictionaries",
+                "challenge": "Loop through the following list, outputting the index and value of each element\nx = ['tic', 'tac', 'toe']",
+                "sample": "for i, v in enumerate(['tic', 'tac', 'toe']):\n    print i, v",
+                "check": "for +(\\w) *, *(\\w) +in +enumerate *\\( *\\[ *('|\")tic\\3 *, *('|\")tac\\4 *, *('|\")toe\\3 *\\] *\\) *: *\n\\s+print +\\1 *, *\\2 *",
+                "output": "0 tic\n1 tac\n2 toe"
+            },
+            {
+                "subject": "Part I",
+                "module": "Tuples, Sets, and Dictionaries",
+                "challenge": "Using the following lists, output the questions and answers, in the format, \"What is your [question]? It is [answer].\"\n\nquestions = ['name', 'quest', 'favorite color']\nanswers = ['lancelot', 'the holy grail', 'blue']",
+                "sample": "for q, a in zip(questions, answers):\n    print 'What is your {0}? It is {1}.'.format(q,a)",
+                "check": "(?:for +(\\w+) *, *(\\w+) +in +zip *\\( *questions *, *answers *\\) *: *\n(\\s+|\\t)print *('|\")What is your \\{0\\}\\? It is \\{1\\}\\.\\4 *\\. *format *\\( *\\1 *, *\\2 *\\) *)|(?:for +(\\w+) *, *(\\w+) +in +zip *\\( *questions *, *answers *\\) *: *\n(\\s+|\\t)print *('|\")What is your \\{1\\}\\? It is \\{0\\}\\.\\8 *\\. *format *\\( *\\6 *, *\\5 *\\) *)|(?:for +(\\w+) *, *(\\w+) +in +zip *\\( *answers *, *questions *\\) *: *\n(\\s+|\\t)print *('|\")What is your \\{0\\}\\? It is \\{1\\}\\.\\12 *\\. *format *\\( *\\10 *, *\\9 *\\) *)(?:for +(\\w+) *, *(\\w+) +in +zip *\\( *answers *, *questions *\\) *: *\n(\\s+|\\t)print *('|\")What is your \\{1\\}\\? It is \\{0\\}\\.\\16 *\\. *format *\\( *\\13 *, *\\14 *\\) *)",
+                "output": "What is your name?  It is lancelot.\nWhat is your quest?  It is the holy grail.\nWhat is your favorite color?  It is blue."
+            },
+            {
+                "subject": "Part I",
+                "module": "Tuples, Sets, and Dictionaries",
+                "challenge": "Output the odd numbers from 1 through 9, in reverse order",
+                "sample": "for i in reversed(xrange(1,10,2)):\n    print i",
+                "check": "for +(\\w+) +in +reversed *\\( *x?range *\\( *1 *, *10 *, *2 *\\) *\\) *: *\n(\\s+|\\t)print +\\1 *",
+                "output": "9\n7\n5\n3\n1"
+            },
+            {
+                "subject": "Part I",
+                "module": "Tuples, Sets, and Dictionaries",
+                "challenge": "Output the following the unique values of the following list in alphabetical order, using a loop.\n\nbasket = ['apple', 'orange', 'apple', 'pear', 'orange', 'banana']",
+                "sample": "for f in sorted(set(basket)):\n    print f",
+                "check": "for +(\\w+) +in +sorted *\\( *set *\\( *basket *\\) *\\) *: *\n( +|\\t)print +\\1 *",
+                "output": "apple\nbanana\norange\npear"
+            },
+            {
+                "subject": "Part I",
+                "module": "Tuples, Sets, and Dictionaries",
+                "challenge": "Output the following dictionary keys and values in the format, \"[key] [value]\".\n\nknights = {'gallahad': 'the pure', 'robin': 'the brave'}",
+                "sample": "for k, v in knights.iteritems():\n    print k, v",
+                "check": "for +(\\w+) *, *(\\w+) +in +knights *\\. *iteritems *\\( *\\) *: *\n( +|\\t)print +\\1 *, *\\2 *",
+                "output": "gallahad the pure\nrobin the brave"
             }
         ]
     }
