@@ -10,7 +10,7 @@
       var cmds, getRandomExercise, getSubject, play, play2, setModule, showModules, subjectOptions, termCmd;
       $scope.init = function() {
         $scope.processCmd = getSubject;
-        return $http.get('http://zwhitchcox.github.io/cli.json').success(function(data) {
+        return $http.get('/terminal/cli.json').success(function(data) {
           $scope.subjects = data;
           return console.log(data);
         });
