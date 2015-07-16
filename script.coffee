@@ -3,7 +3,7 @@ cli = angular.module('cli',['ngResource'])
 cli.controller('Ctrl', ['$scope','$http','Exercises',($scope,$http,Exercises) ->
   $scope.init = ->
     $scope.processCmd = getSubject
-    $http.get('/terminal/cli.json')
+    $http.get('cli.json')
       .success((data)->
         $scope.subjects = data
         console.log data
