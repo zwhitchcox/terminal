@@ -9,6 +9,7 @@ cli.controller('Ctrl', ['$scope','$http','Exercises',($scope,$http,Exercises) ->
       $http.get('/clis.json')
         .success((data)->
           $scope.subjects = data
+          console.log data
         )
   subjectOptions =
     """

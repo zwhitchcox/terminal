@@ -14,7 +14,8 @@
           return $scope.subjects = JSON.parse(localStorage['clis']);
         } else {
           return $http.get('/clis.json').success(function(data) {
-            return $scope.subjects = data;
+            $scope.subjects = data;
+            return console.log(data);
           });
         }
       };
