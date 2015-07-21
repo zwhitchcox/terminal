@@ -1,0 +1,39 @@
+<section ng-controller="EditCtrl" ng-init="getExercises()">
+<div class="row">
+  <div class="col-sm-offset-2">
+  <div class="btn btn-default" ng-class="{'active':active.subject===subject}" 
+    ng-click="active.subject=subject" ng-repeat="subject in subjects track by $index">
+    {{subject.name}}</div>
+  <div class="btn btn-default" ng-click="toggleFocus()" ng-class="{'active':focus==='modules'}">Modules</div>
+  <div class="btn btn-default" ng-click="resetExercises()">Reset</div>
+  <button class="btn btn-default" data-toggle="modal" data-target="#myModal">Help</button>
+  <a data-toggle="modal" data-target="#exerciseEdit" ng-click="save('create')">
+    <button class="btn btn-default" ng-click="curX={}"><i class="glyphicon glyphicon-plus"></i></button>
+  </a>
+  &nbsp;<span id="single_clippy"></span>
+</div>
+</div>
+<br>
+<div class="row">
+<div class="col-xs-4">
+<select ng-model="cur.module" ng-options="module as module.name for module in subjects[active.subject]" 
+  placeholder="module" class="form-control"></select>
+</div>
+<div class="col-xs-3">
+  <div class="form-group">
+  <input ng-model="cur.challenge" placeholder="challenge" class="form-control">
+</div>
+</div>
+<div class="col-xs-3">
+  <div class="form-group">
+  <input ng-model="cur.sample" placeholder="sample" class="form-control">
+</div>
+</div>
+</div>
+<br>
+<ng-include src="'partials/'+focus+'.html'"></ng-include>
+<ng-include src="'partials/help-modal.html'"></ng-include>
+<ng-include src="'partials/edit-modal.html'"></ng-include>
+</section>
+
+

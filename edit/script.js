@@ -3,12 +3,8 @@ app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
     when('/:tech', {
-      templateUrl: 'list.html',
+      templateUrl: 'edit.html',
       controller: 'EditCtrl'
-    }).
-    when('modules/:tech', {
-      templateUrl: 'order.html',
-      controller: 'OrderCtrl'
     }).
     otherwise({
       redirectTo: '/'

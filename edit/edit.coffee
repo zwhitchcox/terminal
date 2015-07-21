@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app').controller('EditCtrl',['$scope','$http','$routeParams', ($scope,$http,$routeParams) ->
-  $scope.asubj = {active:''}
+  $scope.active = {subject:''}
   if /cli/i.test $routeParams.tech
       $scope.url = 'clis'
   else if /python/i.test $routeParams.tech
@@ -11,12 +11,13 @@ angular.module('app').controller('EditCtrl',['$scope','$http','$routeParams', ($
       $scope.subjects = JSON.parse(localStorage[$scope.url])
     else 
       $scope.resetExercises()
-    $scope.subjectNames = Object.keys $scope.subjects
+  $('#single_clippy').clippy({text: localStorage[$routeParams.tech]})
 
-  $scope.setCur = (x) ->
+  $scope.setCur = (x,m) ->
     $scope.editX = x
-    $scope.curX = $.extend(true, {}, x)
-  
+    $scope.editX.module = m.name
+    $scope.editX.subject = $scope.active.subject.name
+    $scope.curX = JSON.parse(JSON.stringify($scope.editX))
   $scope.val = (it) ->
     try
       new RegExp('^'+it.check+'$').test(it.sample)
@@ -25,58 +26,68 @@ angular.module('app').controller('EditCtrl',['$scope','$http','$routeParams', ($
     $scope.state = state
 
   $scope.update = ->
-    if !$scope.subjects.hasOwnProperty($scope.curX.subject)
-        $scope.subjects[$scope.curX.subject] = {}
-    if !$scope.subjects[$scope.curX.subject].hasOwnProperty($scope.curX.module)
-      $scope.subjects[$scope.curX.subject][$scope.curX.module] = []
+    saveX = $.extend true, {}, $scope.curX
+    delete saveX.subject
+    delete saveX.module
+    if !(curSubj = _.findWhere($scope.subjects,{name:$scope.curX.subject}))
+      $scope.subjects.push {name:$scope.curX.subject,modules:[]}
+    if !(curMod = _.findWhere($scope.subjects[curSubj],{name:$scope.curX.module}))
+      $scope.subjects[curSubj].push({exercises:[],name:$scope.curX.module})
     if $scope.state == 'create'
-      $scope.subjects[$scope.curX.subject][$scope.curX.module].push($scope.curX)
+      curMod.exercises.push($scope.curX)
       alert('created')
     else
       if $scope.editX.module != $scope.curX.module
-        $scope.subjects[$scope.editX.subject][$scope.editX.module].splice(
-          $scope.subjects[$scope.editX.subject][$scope.editX.module].indexOf($scope.editX),1
-        )
+        $scope.remove($scope.editX)
         $scope.state = 'create'
         $scope.update()
         $scope.state = 'edit'
         return
       $scope.editX.sample    = $scope.curX.sample
-      $scope.editX.subject   = $scope.curX.subject
-      $scope.editX.module    = $scope.curX.module
       $scope.editX.challenge = $scope.curX.challenge
       $scope.editX.check     = $scope.curX.check
       $scope.editX.output    = $scope.curX.output
     $scope.updateLocalStorage()
-  
-  $('#single_clippy').clippy({text: localStorage['clis']})
-
 
   $scope.remove = (exercise) ->
-    $scope.subjects[exercise.subject][exercise.module].splice(
-      $scope.subjects[exercise.subject][exercise.module].indexOf(exercise),1
-    )
+    curMod = _.findWhere($scope.subjects[exercise.subject],{name:exercise.module})
+    curMod.exercises.splice(curMod.exercises.indexOf(exercise),1)
     $scope.updateLocalStorage()
   
   $scope.updateLocalStorage = () ->
-    saveSubj = $.extend(true,{},$scope.subjects)
-    Object.keys(saveSubj).forEach((curSubj) ->
-      Object.keys(saveSubj[curSubj]).forEach((curMod) ->
-        if saveSubj[curSubj][curMod].length == 0
-          delete saveSubj[curSubj][curMod]
-          delete $scope.subjects[curSubj][curMod]
+    $scope.subjects.forEach((curSubj) ->
+      curSubj.modules.forEach((curMod, idx) ->
+        if curMod.exercises.length == 0
+          $scope.subjects[curSubj].splice(idx,1)
       )
     )
-    Object.keys(saveSubj).forEach((cur)->
-      delete saveSubj[cur]['$$hashKey']
-    )
-    localStorage[$scope.url] = JSON.stringify saveSubj
+    localStorage[$scope.url] = angular.toJson  $scope.subjects
     $('#single_clippy').clippy({text: localStorage[$scope.url]})
-
+  
   $scope.resetExercises = () ->
     $http.get("/#{$scope.url}.json")
       .success((data)->
         $scope.subjects = data
         $scope.updateLocalStorage()
       )
+  $scope.focus = 'exercises'
+  $scope.toggleFocus = ->
+    if $scope.focus == 'modules'
+      $scope.focus = 'exercises'
+    else $scope.focus = 'modules'
+  
+  # drag and drop handlers
+  $scope.dragModuleFn = (module,dragSub) -> 
+    $scope.dragModule = module
+    $scope.dragModuleSubject = dragSub
+  $scope.dropModuleFn = (module,dropSub) ->
+    dragSub = $scope.dragModuleSubject
+    dragSub.splice(dragSub.indexOf($scope.dragModule),1)
+    dropSub.splice(dropSub.indexOf(module),0,$scope.dragModule)
+  $scope.addSubject = (subjectName) ->
+    $scope.subjects.push {name:subjectName,modules: []}
+  $scope.addModuleToSubject = (dropSub) ->
+    dragSub = $scope.dragModuleSubject
+    dragSub.splice(dragSub.indexOf($scope.dragModule),1)
+    dropSub.push $scope.dragModule
 ])

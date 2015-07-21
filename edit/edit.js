@@ -3,8 +3,8 @@
   'use strict';
   angular.module('app').controller('EditCtrl', [
     '$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
-      $scope.asubj = {
-        active: ''
+      $scope.active = {
+        subject: ''
       };
       if (/cli/i.test($routeParams.tech)) {
         $scope.url = 'clis';
@@ -13,15 +13,19 @@
       }
       $scope.getExercises = function() {
         if (localStorage[$scope.url] !== void 0) {
-          $scope.subjects = JSON.parse(localStorage[$scope.url]);
+          return $scope.subjects = JSON.parse(localStorage[$scope.url]);
         } else {
-          $scope.resetExercises();
+          return $scope.resetExercises();
         }
-        return $scope.subjectNames = Object.keys($scope.subjects);
       };
-      $scope.setCur = function(x) {
+      $('#single_clippy').clippy({
+        text: localStorage[$routeParams.tech]
+      });
+      $scope.setCur = function(x, m) {
         $scope.editX = x;
-        return $scope.curX = $.extend(true, {}, x);
+        $scope.editX.module = m.name;
+        $scope.editX.subject = $scope.active.subject.name;
+        return $scope.curX = JSON.parse(JSON.stringify($scope.editX));
       };
       $scope.val = function(it) {
         var e;
@@ -35,63 +39,100 @@
         return $scope.state = state;
       };
       $scope.update = function() {
-        if (!$scope.subjects.hasOwnProperty($scope.curX.subject)) {
-          $scope.subjects[$scope.curX.subject] = {};
+        var curMod, curSubj, saveX;
+        saveX = $.extend(true, {}, $scope.curX);
+        delete saveX.subject;
+        delete saveX.module;
+        if (!(curSubj = _.findWhere($scope.subjects, {
+          name: $scope.curX.subject
+        }))) {
+          $scope.subjects.push({
+            name: $scope.curX.subject,
+            modules: []
+          });
         }
-        if (!$scope.subjects[$scope.curX.subject].hasOwnProperty($scope.curX.module)) {
-          $scope.subjects[$scope.curX.subject][$scope.curX.module] = [];
+        if (!(curMod = _.findWhere($scope.subjects[curSubj], {
+          name: $scope.curX.module
+        }))) {
+          $scope.subjects[curSubj].push({
+            exercises: [],
+            name: $scope.curX.module
+          });
         }
         if ($scope.state === 'create') {
-          $scope.subjects[$scope.curX.subject][$scope.curX.module].push($scope.curX);
+          curMod.exercises.push($scope.curX);
           alert('created');
         } else {
           if ($scope.editX.module !== $scope.curX.module) {
-            $scope.subjects[$scope.editX.subject][$scope.editX.module].splice($scope.subjects[$scope.editX.subject][$scope.editX.module].indexOf($scope.editX), 1);
+            $scope.remove($scope.editX);
             $scope.state = 'create';
             $scope.update();
             $scope.state = 'edit';
             return;
           }
           $scope.editX.sample = $scope.curX.sample;
-          $scope.editX.subject = $scope.curX.subject;
-          $scope.editX.module = $scope.curX.module;
           $scope.editX.challenge = $scope.curX.challenge;
           $scope.editX.check = $scope.curX.check;
           $scope.editX.output = $scope.curX.output;
         }
         return $scope.updateLocalStorage();
       };
-      $('#single_clippy').clippy({
-        text: localStorage['clis']
-      });
       $scope.remove = function(exercise) {
-        $scope.subjects[exercise.subject][exercise.module].splice($scope.subjects[exercise.subject][exercise.module].indexOf(exercise), 1);
+        var curMod;
+        curMod = _.findWhere($scope.subjects[exercise.subject], {
+          name: exercise.module
+        });
+        curMod.exercises.splice(curMod.exercises.indexOf(exercise), 1);
         return $scope.updateLocalStorage();
       };
       $scope.updateLocalStorage = function() {
-        var saveSubj;
-        saveSubj = $.extend(true, {}, $scope.subjects);
-        Object.keys(saveSubj).forEach(function(curSubj) {
-          return Object.keys(saveSubj[curSubj]).forEach(function(curMod) {
-            if (saveSubj[curSubj][curMod].length === 0) {
-              delete saveSubj[curSubj][curMod];
-              return delete $scope.subjects[curSubj][curMod];
+        $scope.subjects.forEach(function(curSubj) {
+          return curSubj.modules.forEach(function(curMod, idx) {
+            if (curMod.exercises.length === 0) {
+              return $scope.subjects[curSubj].splice(idx, 1);
             }
           });
         });
-        Object.keys(saveSubj).forEach(function(cur) {
-          return delete saveSubj[cur]['$$hashKey'];
-        });
-        localStorage[$scope.url] = JSON.stringify(saveSubj);
+        localStorage[$scope.url] = angular.toJson($scope.subjects);
         return $('#single_clippy').clippy({
           text: localStorage[$scope.url]
         });
       };
-      return $scope.resetExercises = function() {
+      $scope.resetExercises = function() {
         return $http.get("/" + $scope.url + ".json").success(function(data) {
           $scope.subjects = data;
           return $scope.updateLocalStorage();
         });
+      };
+      $scope.focus = 'exercises';
+      $scope.toggleFocus = function() {
+        if ($scope.focus === 'modules') {
+          return $scope.focus = 'exercises';
+        } else {
+          return $scope.focus = 'modules';
+        }
+      };
+      $scope.dragModuleFn = function(module, dragSub) {
+        $scope.dragModule = module;
+        return $scope.dragModuleSubject = dragSub;
+      };
+      $scope.dropModuleFn = function(module, dropSub) {
+        var dragSub;
+        dragSub = $scope.dragModuleSubject;
+        dragSub.splice(dragSub.indexOf($scope.dragModule), 1);
+        return dropSub.splice(dropSub.indexOf(module), 0, $scope.dragModule);
+      };
+      $scope.addSubject = function(subjectName) {
+        return $scope.subjects.push({
+          name: subjectName,
+          modules: []
+        });
+      };
+      return $scope.addModuleToSubject = function(dropSub) {
+        var dragSub;
+        dragSub = $scope.dragModuleSubject;
+        dragSub.splice(dragSub.indexOf($scope.dragModule), 1);
+        return dropSub.push($scope.dragModule);
       };
     }
   ]);

@@ -1,0 +1,14 @@
+<ul class="subjects unstyled list-group col-md-8 shadowed-list-group">
+<span ng-repeat="module in active.subject.modules |  module:cur.module">
+  <h2>{{module.name}}</h2>
+    <li class="list-group-item" ng-repeat="exercise in module.exercises | filter: {challenge:cur.challenge} | filter: {sample:cur.sample} track by $index">
+      <a class="btn btn-glyph pull-left" data-toggle="modal" data-target="#exerciseEdit" ng-click="save('edit'); setCur(exercise,module)">
+        <i class="glyphicon glyphicon-edit"></i>
+      </a>
+      <a class="btn btn-glyph pull-left" ng-click="remove(exercise)">
+        <i class="glyphicon glyphicon-trash"></i>
+      </a>
+      {{exercise.challenge}}
+    </li>
+</span>
+</ul>

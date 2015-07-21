@@ -1,0 +1,16 @@
+<div class="form-group col-xs-5"><input class="form-control" ng-model="newSubject"></div>
+<button class="btn btn-default" ng-click="addSubject(newSubject)">Add Subject</button>
+<button class="btn btn-default" ng-click="updateLocalStorage()">Save</button>
+<span ng-repeat="subject in subjects">
+<h2 ng-drop="addModuleToSubject(subject.modules)">{{subject.name}}&nbsp;
+<div class="form-group col-sm-3"><input class="form-control" ng-model="subject.name" ng-model-options="{ updateOn: 'blur' }"
+  ></div>
+</h2>
+<ul class="list-group">
+<span ng-repeat="module in subject.modules">
+<li class="list-group-item" draggable="true" ng-drop="dropModuleFn(module,subject.modules)" ng-drag="dragModuleFn(module,subject.modules)">
+  {{module.name}}
+</li>
+</span>
+</ul>
+</span>
