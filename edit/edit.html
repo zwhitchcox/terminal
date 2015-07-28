@@ -4,6 +4,7 @@
   <div class="btn btn-default" ng-class="{'active':active.subject===subject}" 
     ng-click="active.subject=subject" ng-repeat="subject in subjects track by $index">
     {{subject.name}}</div>
+    <br>
   <div class="btn btn-default" ng-click="toggleFocus()" ng-class="{'active':focus==='modules'}">Modules</div>
   <div class="btn btn-default" ng-click="resetExercises()">Reset</div>
   <button class="btn btn-default" data-toggle="modal" data-target="#myModal">Help</button>

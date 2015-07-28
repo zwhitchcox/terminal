@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('EditCtrl',['$scope','$http','$routeParams', ($scope,$http,$routeParams) ->
   $scope.active = {subject:''}
   if /cli/i.test $routeParams.tech
@@ -18,6 +16,7 @@ angular.module('app').controller('EditCtrl',['$scope','$http','$routeParams', ($
     $scope.editX.module = m.name
     $scope.editX.subject = $scope.active.subject.name
     $scope.curX = JSON.parse(JSON.stringify($scope.editX))
+    $scope.curX.subject = _.findWhere($scope.subjects,{name:$scope.editX.subject})
   $scope.val = (it) ->
     try
       new RegExp('^'+it.check+'$').test(it.sample)
@@ -26,19 +25,19 @@ angular.module('app').controller('EditCtrl',['$scope','$http','$routeParams', ($
     $scope.state = state
 
   $scope.update = ->
-    saveX = $.extend true, {}, $scope.curX
+    saveX = JSON.parse JSON.stringify $scope.curX
     delete saveX.subject
     delete saveX.module
-    if !(curSubj = _.findWhere($scope.subjects,{name:$scope.curX.subject}))
-      $scope.subjects.push {name:$scope.curX.subject,modules:[]}
-    if !(curMod = _.findWhere($scope.subjects[curSubj],{name:$scope.curX.module}))
-      $scope.subjects[curSubj].push({exercises:[],name:$scope.curX.module})
+    if !(curSubj = _.findWhere($scope.subjects,{name:$scope.curX.subject.name}))
+      $scope.subjects.push {name:$scope.curX.subject.name,modules:[]}
+    if !(curMod = _.findWhere(curSubj.modules,{name:$scope.curX.module}))
+      curSubj.modules.push(curMod = {exercises:[],name:$scope.curX.module})
     if $scope.state == 'create'
-      curMod.exercises.push($scope.curX)
+      curMod.exercises.push(saveX)
       alert('created')
     else
       if $scope.editX.module != $scope.curX.module
-        $scope.remove($scope.editX)
+        $scope.remove $scope.editX
         $scope.state = 'create'
         $scope.update()
         $scope.state = 'edit'
@@ -49,16 +48,15 @@ angular.module('app').controller('EditCtrl',['$scope','$http','$routeParams', ($
       $scope.editX.output    = $scope.curX.output
     $scope.updateLocalStorage()
 
-  $scope.remove = (exercise) ->
-    curMod = _.findWhere($scope.subjects[exercise.subject],{name:exercise.module})
-    curMod.exercises.splice(curMod.exercises.indexOf(exercise),1)
+  $scope.remove = (exercise,module) ->
+    module.exercises.splice(module.exercises.indexOf(exercise),1)
     $scope.updateLocalStorage()
   
   $scope.updateLocalStorage = () ->
     $scope.subjects.forEach((curSubj) ->
       curSubj.modules.forEach((curMod, idx) ->
         if curMod.exercises.length == 0
-          $scope.subjects[curSubj].splice(idx,1)
+          curSubj.modules.splice(idx,1)
       )
     )
     localStorage[$scope.url] = angular.toJson  $scope.subjects
@@ -66,10 +64,10 @@ angular.module('app').controller('EditCtrl',['$scope','$http','$routeParams', ($
   
   $scope.resetExercises = () ->
     $http.get("/#{$scope.url}.json")
-      .success((data)->
+      .success (data)->
         $scope.subjects = data
         $scope.updateLocalStorage()
-      )
+        
   $scope.focus = 'exercises'
   $scope.toggleFocus = ->
     if $scope.focus == 'modules'
